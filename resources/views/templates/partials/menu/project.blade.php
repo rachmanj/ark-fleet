@@ -1,6 +1,6 @@
-<li class="nav-item {{ request()->is('projects') || request()->is('projects/*') ? 'menu-open' : '' }}">
-  <a href="{{ route('project.index') }}" class="nav-link">
-    <i class="nav-icon fas fa-building"></i>
+<li class="nav-item">
+  <a href="{{ route('project.index') }}" class="nav-link {{ request()->is('projects') || request()->is('projects/*') ? 'active' : '' }}">
+    <i class="fas fa-building"></i>
     <p>
       Projects
     </p>

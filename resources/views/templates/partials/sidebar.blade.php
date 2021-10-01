@@ -2,7 +2,7 @@
   <!-- Brand Logo -->
   <a href="{{ route('home') }}" class="brand-link">
     <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light"><b>ARKA</b> - Fleet</span>
+    <span class="brand-text font-weight-light"><b>ARK</b>Fleet</span>
   </a>
 
   <!-- Sidebar -->
@@ -14,7 +14,7 @@
       </div>
       <div class="info">
         {{-- <a href="#" class="d-block">{{ Auth()->user()->name }}</a> --}}
-        <a href="{{ route('home') }}" class="d-block">Omanof Sullivan</a>
+        <a href="{{ route('home') }}" class="d-block">{{ Auth()->user()->name }}</a>
       </div>
     </div>
 
@@ -23,6 +23,8 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         
         @include('templates.partials.menu.dashboard')
+
+        @include('templates.partials.menu.equipment')
 
         @include('templates.partials.menu.project')
 

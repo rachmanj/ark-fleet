@@ -14,7 +14,7 @@
           <p class="card-text">
             <h2><b>ARKA</b> Fleet Management</h2>
             <hr>
-            <h5>a Fleet Management System</h5>
+            <h5>a Fleet Documentation System</h5>
           </p>
   
         </div>
