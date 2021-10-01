@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Equipment extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function manufacture()
+    {
+        return $this->belongsTo(Manufacture::class);
+    }
 }

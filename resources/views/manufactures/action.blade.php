@@ -1,0 +1,1 @@
+<a href="{{ route('manufacture.edit', $model->id) }}" class="btn btn-xs btn-warning">edit</a>

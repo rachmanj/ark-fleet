@@ -27,6 +27,7 @@
         @include('templates.partials.menu.equipment')
 
         @include('templates.partials.menu.project')
+        @include('templates.partials.menu.manufacture')
 
         
       </ul>

@@ -20,6 +20,8 @@ class CreateEquipmentTable extends Migration
             $table->unsignedBigInteger('model_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('status_id')->nullable();
+            $table->unsignedBigInteger('current_project_id')->nullable(); //lokasi alat saat inu
+            $table->string('cart_move_flag')->nullable(); // cart pada saat transaksi perpindahan alat (IPA)
             $table->integer('active')->default(0); // 1 = active, 0 = in-active
             $table->softDeletes();
             $table->timestamps();
