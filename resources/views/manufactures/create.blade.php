@@ -17,12 +17,17 @@
             <h3 class="card-title">Create New Manufacture</h3>
           </div> {{-- card-header --}}
 
-          <form action="{{ route('manufacture.store') }}" method="POST">
+          <form action="{{ route('manufactures.store') }}" method="POST">
             @csrf
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input name="name" type="text" class="form-control" id="name" autofocus>
+                <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" autofocus>
+                @error('name')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
               </div>
             </div> {{-- card-body --}}
   

@@ -1,11 +1,11 @@
 @extends('templates.main')
 
 @section('title_page')
-    Manufactures
+    Unit Model
 @endsection
 
 @section('breadcrumb_title')
-    manufactures
+    unitmodel
 @endsection
 
 @section('content')
@@ -20,15 +20,17 @@
                 {{ Session::get('success') }}
               </div>
             @endif
-            <a href="{{ route('manufactures.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Manufacture</a>
+            <a href="{{ route('unitmodels.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Unit Model</a>
           </div> {{-- card-header --}}
 
           <div class="card-body">
-            <table id="manufactures" class="table table-bordered table-striped">
+            <table id="unitmodels" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Name</th>
+                  <th>Model No</th>
+                  <th>Manufacture</th>
+                  <th>Desc</th>
                   <th>action</th>
                 </tr>
               </thead>
@@ -57,13 +59,15 @@
 
   <script>
     $(function () {
-      $("#manufactures").DataTable({
+      $("#unitmodels").DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('manufactures.index.data') }}',
+        ajax: '{{ route('unitmodels.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
-          {data: 'name'},
+          {data: 'model_no'},
+          {data: 'manufacture'},
+          {data: 'description'},
           {data: 'action'},
         ],
         fixedHeader: true,

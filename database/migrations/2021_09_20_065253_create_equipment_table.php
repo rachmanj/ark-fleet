@@ -15,7 +15,7 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
-            $table->string('equipment_no');
+            $table->string('unit_no');
             $table->string('description')->nullable();
             $table->unsignedBigInteger('model_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();

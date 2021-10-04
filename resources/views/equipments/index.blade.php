@@ -1,11 +1,11 @@
 @extends('templates.main')
 
 @section('title_page')
-    Manufactures
+    Equipments
 @endsection
 
 @section('breadcrumb_title')
-    manufactures
+    equipments
 @endsection
 
 @section('content')
@@ -20,11 +20,11 @@
                 {{ Session::get('success') }}
               </div>
             @endif
-            <a href="{{ route('manufactures.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Manufacture</a>
+            <a href="{{ route('equipments.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Equipment</a>
           </div> {{-- card-header --}}
 
           <div class="card-body">
-            <table id="manufactures" class="table table-bordered table-striped">
+            <table id="equipments" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>No</th>
@@ -57,14 +57,14 @@
 
   <script>
     $(function () {
-      $("#manufactures").DataTable({
+      $("#equipments").DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('manufactures.index.data') }}',
+        ajax: '{{ route('equipments.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
-          {data: 'name'},
-          {data: 'action'},
+          // {data: 'name'},
+          // {data: 'action'},
         ],
         fixedHeader: true,
       })

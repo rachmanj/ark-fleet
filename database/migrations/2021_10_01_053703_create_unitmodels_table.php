@@ -16,9 +16,8 @@ class CreateUnitmodelsTable extends Migration
         Schema::create('unitmodels', function (Blueprint $table) {
             $table->id();
             $table->string('model_no');
-            $table->unsignedBigInteger('manufacture_id');
+            $table->foreignId('manufacture_id')->constrained();
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
         });
     }

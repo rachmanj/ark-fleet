@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreManufactureRequest;
 use App\Models\Manufacture;
 use Illuminate\Http\Request;
 
@@ -17,11 +18,11 @@ class ManufactureController extends Controller
         return view('manufactures.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreManufactureRequest $request)
     {
-        Manufacture::create($request->all());
+        Manufacture::create($request->validated());
 
-        return redirect()->route('manufacture.index')->with('success', 'Data successfully added');
+        return redirect()->route('manufactures.index')->with('success', 'Data successfully added');
     }
 
     public function edit($id)
@@ -31,20 +32,17 @@ class ManufactureController extends Controller
         return view('manufactures.edit', compact('manufacture'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreManufactureRequest $request, Manufacture $manufacture)
     {
-        $manufacture = Manufacture::find($id);
-
-        $manufacture->update($request->all());
-        return redirect()->route('manufacture.index')->with('success', 'Data successfully updated');
+        $manufacture->update($request->validated());
+        return redirect()->route('manufactures.index')->with('success', 'Data successfully updated');
     }
 
-    public function destroy($id)
+    public function destroy(Manufacture $manufacture)
     {
-        $manufacture = Manufacture::find($id);
-
         $manufacture->delete();
-        return redirect()->route('manufacture.index')->with('success', 'Data successfully deleted');
+
+        return redirect()->route('manufactures.index')->with('success', 'Data successfully deleted');
     }
 
     public function index_data()
@@ -54,6 +52,7 @@ class ManufactureController extends Controller
         return datatables()->of($manufacture)
                 ->addIndexColumn()
                 ->addColumn('action', 'manufactures.action')
+                ->rawColumns(['action'])
                 ->toJson();
     }
 }

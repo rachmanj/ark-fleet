@@ -15,11 +15,12 @@
         <div class="card">
           <div class="card-header">
             @if (Session::has('success'))
-              <div class="alert alert-success">
-                {{ Session::get('success') }}
-              </div>
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              {{ Session::get('success') }}
+            </div>
             @endif
-            <a href="{{ route('project.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Project</a>
+            <a href="{{ route('projects.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Project</a>
           </div> {{-- card-header --}}
 
           <div class="card-body">
@@ -56,13 +57,14 @@
   <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('adminlte/plugins/datatables/datatables.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/bs-notify.min.js') }}"></script>
 
   <script>
     $(function () {
       $("#projects").DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('project.index.data') }}',
+        ajax: '{{ route('projects.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
           {data: 'project_code'},

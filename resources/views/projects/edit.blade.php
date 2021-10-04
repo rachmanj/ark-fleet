@@ -17,7 +17,7 @@
             <h3 class="card-title">Edit Project Data</h3>
           </div> {{-- card-header --}}
 
-          <form action="{{ route('project.update', $project->id) }}" method="POST">
+          <form action="{{ route('projects.update', $project->id) }}" method="POST">
             @csrf @method('PATCH')
             <div class="card-body">
               <div class="form-group">
@@ -50,7 +50,7 @@
             </div> {{-- card-body --}}
   
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-sm btn-primary">Submit</button>
             </div>
           </form>
 

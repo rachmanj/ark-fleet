@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -17,12 +18,19 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
+        // $cek = $request->validated() + $request->city;
+        // return $cek;
+        // die;
 
-        Project::create($request->all());
+        Project::create(array_merge($request->validated(), [
+            'address' => $request->address,
+            'city' => $request->city,
+            'created_by' => auth()->id()
+        ]));
 
-        return redirect()->route('project.index')->with('success', 'Data successfully added');
+        return redirect()->route('projects.index')->with('success', 'Data successfully added');
     }
 
     public function edit($id)
@@ -32,12 +40,15 @@ class ProjectController extends Controller
         return view('projects.edit', compact('project'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreProjectRequest $request, Project $project)
     {
-        $project = Project::find($id);
+        $project->update(array_merge($request->validated(), [
+            'address' => $request->address,
+            'city' => $request->city,
+            'isActive' => $request->isActive
+        ]));
 
-        $project->update($request->all());
-        return redirect()->route('project.index')->with('success', 'Data successfully updated');
+        return redirect()->route('projects.index')->with('success', 'Data successfully updated');
     }
 
     public function index_data()
@@ -50,6 +61,7 @@ class ProjectController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', 'projects.action')
+                ->rawColumns(['action'])
                 ->toJson();
     }
 }
