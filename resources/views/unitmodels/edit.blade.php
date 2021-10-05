@@ -1,11 +1,11 @@
 @extends('templates.main')
 
 @section('title_page')
-    Manufactures
+    Unit Model
 @endsection
 
 @section('breadcrumb_title')
-    manufactures
+    unitmodel
 @endsection
 
 @section('content')
@@ -14,26 +14,76 @@
         <div class="card">
 
           <div class="card-header">
-            <h3 class="card-title">Edit Manufacture Data</h3>
+            <h3 class="card-title">Create New Model</h3>
           </div> {{-- card-header --}}
 
-          <form action="{{ route('manufactures.update', $manufacture->id) }}" method="POST">
-            @csrf @method('PATCH')
+          <form action="{{ route('unitmodels.update', $unitmodel->id) }}" method="POST">
+            @csrf @method('PUT')
             <div class="card-body">
+
               <div class="form-group">
-                <label for="name">Name</label>
-                <input name="name" value="{{ old('name', $manufacture->name) }}" type="text" class="form-control" id="name" autofocus>
+                <label for="model_no">Model No</label>
+                <input name="model_no" type="text" class="form-control @error('model_no') is-invalid @enderror" id="model_no" value="{{ old('model_no', $unitmodel->model_no) }}" autofocus>
+                @error('model_no')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
               </div>
+
+              <div class="form-group">
+                <label>Manufacture</label>
+                <select name="manufacture_id" class="form-control select2bs4 @error('manufacture_id') is-invalid @enderror">
+                  @foreach ($manufactures as $manufacture)
+                      <option value="{{ $manufacture->id }}" {{ $manufacture->id == $unitmodel->manufacture_id ? 'selected' : '' }}>{{ $manufacture->name }}</option>
+                  @endforeach
+                </select>
+                @error('manufacture_id')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description</label>
+                <input name="description" type="text" class="form-control @error('description') is-invalid @enderror" id="description" value="{{ old('description', $unitmodel->description) }}">
+                @error('description')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+
             </div> {{-- card-body --}}
   
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-sm btn-primary">Submit</button>
             </div>
           </form>
 
         </div> {{--  card --}}
       </div>
     </div>
+@endsection
+
+@section('styles')
+    <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endsection
+
+@section('scripts')
+    <!-- Select2 -->
+  <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
+  <script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    }) 
+  </script>
 @endsection
 
 

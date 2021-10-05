@@ -63,7 +63,9 @@ class UnitmodelController extends Controller
      */
     public function edit(Unitmodel $unitmodel)
     {
-        //
+        $manufactures = Manufacture::orderBy('name', 'asc')->get();
+
+        return view('unitmodels.edit', compact('unitmodel', 'manufactures'));
     }
 
     /**
@@ -73,9 +75,10 @@ class UnitmodelController extends Controller
      * @param  \App\Models\Unitmodel  $unitmodel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unitmodel $unitmodel)
+    public function update(StoreUnitmodelRequest $request, Unitmodel $unitmodel)
     {
-        //
+        $unitmodel->update($request->validated());
+        return redirect()->route('unitmodels.index')->with('success', 'Data successfully updated');
     }
 
     /**
@@ -86,7 +89,9 @@ class UnitmodelController extends Controller
      */
     public function destroy(Unitmodel $unitmodel)
     {
-        //
+        $unitmodel->delete();
+        return redirect()->route('unitmodels.index')->with('success', 'Data has been deleted');
+
     }
 
     public function index_data()
