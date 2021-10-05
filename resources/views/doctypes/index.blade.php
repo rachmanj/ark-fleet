@@ -1,11 +1,11 @@
 @extends('templates.main')
 
 @section('title_page')
-    Unit Model
+    Document Types
 @endsection
 
 @section('breadcrumb_title')
-    unitmodel
+    doctype
 @endsection
 
 @section('content')
@@ -20,18 +20,15 @@
                 {{ Session::get('success') }}
               </div>
             @endif
-            <a href="{{ route('unitmodels.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Unit Model</a>
+            <a href="{{ route('doctypes.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Document Type</a>
           </div> {{-- card-header --}}
 
           <div class="card-body">
-            <table id="unitmodels" class="table table-bordered table-striped">
+            <table id="doctypes" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Model No</th>
-                  <th>Manufacture</th>
-                  <th>Transmisi</th>
-                  <th>Desc</th>
+                  <th>Name</th>
                   <th>action</th>
                 </tr>
               </thead>
@@ -60,16 +57,13 @@
 
   <script>
     $(function () {
-      $("#unitmodels").DataTable({
+      $("#doctypes").DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('unitmodels.index.data') }}',
+        ajax: '{{ route('doctypes.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
-          {data: 'model_no'},
-          {data: 'manufacture'},
-          {data: 'transmisi'},
-          {data: 'description'},
+          {data: 'name'},
           {data: 'action'},
         ],
         fixedHeader: true,

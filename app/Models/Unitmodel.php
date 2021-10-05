@@ -9,7 +9,7 @@ class Unitmodel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['model_no', 'manufacture_id', 'description'];
+    protected $fillable = ['model_no', 'manufacture_id', 'transmisi', 'description'];
 
     public function manufacture()
     {

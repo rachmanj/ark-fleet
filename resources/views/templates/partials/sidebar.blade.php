@@ -28,8 +28,9 @@
 
         <li class="nav-header">MASTER DATA</li>
 
-        @include('templates.partials.menu.project')
+        @include('templates.partials.menu.doctypes')
         @include('templates.partials.menu.manufacture')
+        @include('templates.partials.menu.project')
         @include('templates.partials.menu.unitmodel')
 
         

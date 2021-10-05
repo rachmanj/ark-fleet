@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUnitmodelsTable extends Migration
+class CreateDocumentTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateUnitmodelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('unitmodels', function (Blueprint $table) {
+        Schema::create('document_types', function (Blueprint $table) {
             $table->id();
-            $table->string('model_no');
-            $table->foreignId('manufacture_id')->nullable()->constrained();
-            $table->string('transmisi')->nullable(); // AUTOMATIC/MANUAL/MANUALDOUBLE
-            $table->string('description')->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateUnitmodelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unitmodels');
+        Schema::dropIfExists('document_types');
     }
 }

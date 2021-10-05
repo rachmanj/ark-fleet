@@ -96,7 +96,7 @@ class UnitmodelController extends Controller
 
     public function index_data()
     {
-        $unitmodels = Unitmodel::with('manufacture')->latest()->get();
+        $unitmodels = Unitmodel::with('manufacture')->orderBy('model_no', 'asc')->get();
 
         return datatables()->of($unitmodels)
                 ->editColumn('manufacture', function ($unitmodels) {

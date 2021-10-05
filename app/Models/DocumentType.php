@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Equipment extends Model
+class DocumentType extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['name'];
 
-    public function unitmodel()
+    public function documents()
     {
-        return $this->belongsTo(Unitmodel::class);
+        return $this->hasMany(Document::class);
     }
 }

@@ -47,6 +47,21 @@
               </div>
 
               <div class="form-group">
+                <label>Transmisi</label>
+                <select name="transmisi" class="form-control select2bs4 @error('transmisi') is-invalid @enderror">
+                  <option value="">-- select transmisi --</option>
+                  <option value="AUTOMATIC">AUTOMATIC</option>
+                  <option value="MANUAL">MANUAL</option>
+                  <option value="MANUALDOUBLE">MANUAL DOUBLE</option>
+                </select>
+                @error('transmisi')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+
+              <div class="form-group">
                 <label for="description">Description</label>
                 <input name="description" type="text" class="form-control @error('description') is-invalid @enderror" id="description" value="{{ old('description') }}">
                 @error('description')

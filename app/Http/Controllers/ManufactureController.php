@@ -47,7 +47,7 @@ class ManufactureController extends Controller
 
     public function index_data()
     {
-        $manufacture = Manufacture::latest()->get();
+        $manufacture = Manufacture::orderBy('name', 'asc')->get();
 
         return datatables()->of($manufacture)
                 ->addIndexColumn()

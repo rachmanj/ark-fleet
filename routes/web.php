@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -32,6 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('equipments/data', [EquipmentController::class, 'index_data'])->name('equipments.index.data');
     Route::resource('equipments', EquipmentController::class);
+
+    Route::get('doctypes/data', [DocumentTypeController::class, 'index_data'])->name('doctypes.index.data');
+    Route::resource('doctypes', DocumentTypeController::class);
 });
 
 
