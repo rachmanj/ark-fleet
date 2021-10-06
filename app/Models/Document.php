@@ -29,4 +29,9 @@ class Document extends Model
     {
         return $this->belongsTo(Equipment::class);
     }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 }

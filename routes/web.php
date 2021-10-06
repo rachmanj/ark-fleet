@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitmodelController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('doctypes/data', [DocumentTypeController::class, 'index_data'])->name('doctypes.index.data');
     Route::resource('doctypes', DocumentTypeController::class);
+
+    Route::get('suppliers/data', [SupplierController::class, 'index_data'])->name('suppliers.index.data');
+    Route::resource('suppliers', SupplierController::class);
 });
 
 

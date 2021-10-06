@@ -31,6 +31,7 @@
         @include('templates.partials.menu.doctypes')
         @include('templates.partials.menu.manufacture')
         @include('templates.partials.menu.project')
+        @include('templates.partials.menu.suppliers')
         @include('templates.partials.menu.unitmodel')
 
         
