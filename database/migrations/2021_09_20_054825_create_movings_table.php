@@ -17,9 +17,12 @@ class CreateMovingsTable extends Migration
             $table->id();
             $table->date('ipa_date');
             $table->string('ipa_no');
-            $table->unsignedBigInteger('from_project');
-            $table->unsignedBigInteger('to_project');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('from_project');
+            $table->foreignId('to_project');
+            $table->foreignId('created_by');
+            $table->string('name1')->nullable();
+            $table->string('name2')->nullable();
+            $table->string('name3')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
         });

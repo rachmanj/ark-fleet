@@ -28,7 +28,10 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Name</th>
+                  <th>Unit No</th>
+                  <th>Model</th>
+                  <th>category</th>
+                  <th>Location</th>
                   <th>action</th>
                 </tr>
               </thead>
@@ -63,8 +66,11 @@
         ajax: '{{ route('equipments.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
-          // {data: 'name'},
-          // {data: 'action'},
+          {data: 'unit_no'},
+          {data: 'model'},
+          {data: 'category'},
+          {data: 'current_project'},
+          {data: 'action'},
         ],
         fixedHeader: true,
       })

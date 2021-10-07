@@ -112,6 +112,22 @@
                     @enderror
                   </div>
                 </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select name="unitstatus_id" class="form-control select2bs4 @error('unitstatus_id') is-invalid @enderror">
+                      <option value="">-- select status --</option>
+                      @foreach ($unitstatuses as $unitstatus)
+                          <option value="{{ $unitstatus->id }}">{{ $unitstatus->name }}</option>
+                      @endforeach
+                    </select>
+                    @error('unitstatus_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
 
               </div> {{-- row --}}
 

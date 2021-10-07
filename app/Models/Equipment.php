@@ -10,6 +10,7 @@ class Equipment extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $table = 'equipments';
 
     public function unitmodel()
     {
@@ -19,5 +20,15 @@ class Equipment extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function unitstatus()
+    {
+        return $this->belongsTo(Unitstatus::class);
+    }
+    
+    public function current_project()
+    {
+        return $this->belongsTo(Project::class, 'current_project_id', 'id');
     }
 }
