@@ -17,8 +17,8 @@ class CreateEquipmentTable extends Migration
             $table->id();
             $table->string('unit_no');
             $table->string('remarks')->nullable();
-            $table->unsignedBigInteger('model_id')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreignId('model_id')->nullable();
+            $table->foreignId('category_id')->nullable();
             $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('current_project_id')->nullable(); //lokasi alat saat inu
             $table->string('unit_pic')->nullable();

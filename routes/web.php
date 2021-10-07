@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitmodelController;
+use App\Http\Controllers\UnitstatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -20,6 +22,9 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('equipments/data', [EquipmentController::class, 'index_data'])->name('equipments.index.data');
+    Route::resource('equipments', EquipmentController::class);
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -31,15 +36,18 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('unitmodels/data', [UnitmodelController::class, 'index_data'])->name('unitmodels.index.data');
     Route::resource('unitmodels', UnitmodelController::class);
-    
-    Route::get('equipments/data', [EquipmentController::class, 'index_data'])->name('equipments.index.data');
-    Route::resource('equipments', EquipmentController::class);
 
     Route::get('doctypes/data', [DocumentTypeController::class, 'index_data'])->name('doctypes.index.data');
     Route::resource('doctypes', DocumentTypeController::class);
 
     Route::get('suppliers/data', [SupplierController::class, 'index_data'])->name('suppliers.index.data');
     Route::resource('suppliers', SupplierController::class);
+
+    Route::get('categories/data', [CategoryController::class, 'index_data'])->name('categories.index.data');
+    Route::resource('categories', CategoryController::class);
+
+    Route::get('unitstatuses/data', [UnitstatusController::class, 'index_data'])->name('unitstatuses.index.data');
+    Route::resource('unitstatuses', UnitstatusController::class);
 });
 
-
+Route::get('/model_detail', [UnitmodelController::class, 'get_model_detail'])->name('get_model_detail');

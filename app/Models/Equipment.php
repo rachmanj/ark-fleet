@@ -15,4 +15,9 @@ class Equipment extends Model
     {
         return $this->belongsTo(Unitmodel::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

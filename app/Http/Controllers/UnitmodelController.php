@@ -107,4 +107,20 @@ class UnitmodelController extends Controller
                 ->rawColumns(['action'])
                 ->toJson();
     }
+
+    public function get_model_detail(Request $request)
+    {
+        if(!$request->model_id) {
+            $manufacture = '';
+            $model_desc = '';
+        } else {
+            $manufacture = '';
+            $model_desc = '';
+            $model = Unitmodel::with('manufacture')->where('id', $request->model_id)->first();
+            $manufacture .= $model->manufacture->name;
+            $model_desc .= $model->description;
+        }
+
+        return response()->json(['manufacture' => $manufacture, 'model_desc' => $model_desc]);
+    }
 }
