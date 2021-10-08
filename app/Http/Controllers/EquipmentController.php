@@ -44,7 +44,12 @@ class EquipmentController extends Controller
 
     public function edit(Equipment $equipment)
     {
-        return view('equipments.edit', compact('equipment'));
+        $projects   = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
+        $unitmodels = Unitmodel::with('manufacture')->orderBy('model_no', 'asc')->get();
+        $categories = Category::orderBy('name')->get();
+        $unitstatuses   = Unitstatus::orderBy('name')->get();
+        
+        return view('equipments.edit', compact('equipment', 'projects', 'unitmodels', 'categories', 'unitstatuses'));
     }
 
     public function update(StoreEquipmentRequest $request, Equipment $equipment)

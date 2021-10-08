@@ -6,6 +6,7 @@ use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManufactureController;
+use App\Http\Controllers\MovingController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SupplierController;
@@ -48,6 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('unitstatuses/data', [UnitstatusController::class, 'index_data'])->name('unitstatuses.index.data');
     Route::resource('unitstatuses', UnitstatusController::class);
+
+    Route::get('movings/data', [MovingController::class, 'index_data'])->name('movings.index.data');
+    Route::resource('movings', MovingController::class);
 });
 
 Route::get('/model_detail', [UnitmodelController::class, 'get_model_detail'])->name('get_model_detail');

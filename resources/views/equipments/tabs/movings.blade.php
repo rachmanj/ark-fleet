@@ -1,0 +1,15 @@
+<div class="tab-pane fade show active" id="custom-tabs-four-movings" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+  <div class="col-md-12">
+    <table class="table table-bordered tabel-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>IPA No</th>
+          <th>Date</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
