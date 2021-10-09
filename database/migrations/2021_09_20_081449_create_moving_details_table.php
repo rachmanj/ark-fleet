@@ -16,7 +16,7 @@ class CreateMovingDetailsTable extends Migration
         Schema::create('moving_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('moving_id');
-            $table->foreignId('equipment_id');
+            $table->foreignId('equipment_id')->nullable();
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\MovingController;
+use App\Http\Controllers\MovingDetailController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SupplierController;
@@ -51,7 +52,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('unitstatuses', UnitstatusController::class);
 
     Route::get('movings/data', [MovingController::class, 'index_data'])->name('movings.index.data');
+    Route::get('movings/{moving}/print_pdf', [MovingController::class, 'print_pdf'])->name('movings.print_pdf');
     Route::resource('movings', MovingController::class);
+
+    Route::get('moving_details/incart/data', [MovingDetailController::class, 'unit_incart_data'])->name('moving_details.unit_incart.data');
+    Route::get('moving_details/{from_project_id}/data', [MovingDetailController::class, 'available_unit_data'])->name('moving_details.available_unit.data');
+
+    Route::get('moving_details/{moving_id}/create', [MovingDetailController::class, 'create'])->name('moving_details.create');
+    Route::post('moving_details', [MovingDetailController::class, 'store'])->name('moving_details.store');
+    Route::patch('moving_details/{equipment_id}/add_tocart', [MovingDetailController::class, 'add_tocart'])->name('moving_details.add_tocart');
+    Route::patch('moving_details/{equipment_id}/remove_fromcart', [MovingDetailController::class, 'remove_fromcart'])->name('moving_details.remove_fromcart');
 });
 
 Route::get('/model_detail', [UnitmodelController::class, 'get_model_detail'])->name('get_model_detail');

@@ -17,13 +17,14 @@ class CreateMovingsTable extends Migration
             $table->id();
             $table->date('ipa_date');
             $table->string('ipa_no');
-            $table->foreignId('from_project');
-            $table->foreignId('to_project');
+            $table->foreignId('from_project_id');
+            $table->foreignId('to_project_id');
             $table->foreignId('created_by');
             $table->string('name1')->nullable();
             $table->string('name2')->nullable();
             $table->string('name3')->nullable();
             $table->text('remarks')->nullable();
+            $table->string('flag')->nullable();
             $table->timestamps();
         });
     }

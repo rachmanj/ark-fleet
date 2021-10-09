@@ -29,7 +29,7 @@ class CreateEquipmentsTable extends Migration
             $table->string('bahan_bakar')->nullable(); //solar atau Premium/Pertalite
             $table->string('warna')->nullable(); //warna kendaraan
             $table->string('unit_pic')->nullable();
-            $table->string('cart_move_flag')->nullable(); // cart pada saat transaksi perpindahan alat (IPA)
+            $table->string('cart_flag')->nullable(); // cart pada saat transaksi perpindahan alat (IPA)
             $table->integer('active')->default(0); // 1 = active, 0 = in-active
             $table->softDeletes();
             $table->timestamps();

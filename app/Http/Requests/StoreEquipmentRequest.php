@@ -26,7 +26,7 @@ class StoreEquipmentRequest extends FormRequest
         return [
             'unit_no'   => ['required', 'unique:equipments,unit_no'],
             'description'   => ['required'],
-            'model_id'   => ['required'],
+            'unitmodel_id'   => ['required'],
             'category_id'   => ['required'],
             'unitstatus_id'   => ['required'],
             'current_project_id'   => ['required'],

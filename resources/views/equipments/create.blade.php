@@ -50,13 +50,13 @@
                 <div class="col-4">
                   <div class="form-group">
                     <label>Model</label>
-                    <select name="model_id" id="model_id" class="form-control select2bs4 @error('model_id') is-invalid @enderror">
+                    <select name="unitmodel_id" id="unitmodel_id" class="form-control select2bs4 @error('unitmodel_id') is-invalid @enderror">
                       <option value="">-- select unit model --</option>
                       @foreach ($unitmodels as $unitmodel)
                           <option value="{{ $unitmodel->id }}">{{ $unitmodel->model_no . ' - ' . $unitmodel->manufacture->name }}</option>
                       @endforeach
                     </select>
-                    @error('model_id')
+                    @error('unitmodel_id')
                       <div class="invalid-feedback">
                         {{ $message }}
                       </div>

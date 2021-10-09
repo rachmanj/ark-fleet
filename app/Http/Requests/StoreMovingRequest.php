@@ -24,10 +24,10 @@ class StoreMovingRequest extends FormRequest
     public function rules()
     {
         return [
-            'ipa_no' => ['required'],
+            'ipa_no' => ['required', 'unique:movings'],
             'ipa_date' => ['required'],
-            'from_project' => ['required'],
-            'to_project' => ['required'],
+            'from_project_id' => ['required'],
+            'to_project_id' => ['required'],
         ];
     }
 }
