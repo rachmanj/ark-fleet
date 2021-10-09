@@ -27,6 +27,10 @@
         @include('templates.partials.menu.equipment')
 
         @include('templates.partials.menu.movings')
+        
+        @include('templates.partials.menu.documents')
+
+        @include('templates.partials.menu.reports')
 
         <li class="nav-header">MASTER DATA</li>
 

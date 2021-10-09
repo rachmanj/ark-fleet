@@ -37,4 +37,9 @@ class Equipment extends Model
         return $this->hasMany(MovingDetail::class);
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
 }

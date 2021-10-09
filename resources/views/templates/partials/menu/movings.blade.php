@@ -1,6 +1,6 @@
 <li class="nav-item {{ request()->is('movings') || request()->is('movings/*') ? 'menu-open' : '' }}">
   <a href="#" class="nav-link {{ request()->is('movings') || request()->is('movings/*') ? 'active' : '' }}">
-    <i class="fas fa-snowplow"></i>
+    <i class="fas fa-route"> </i>
     <p>
       Movings
       <i class="right fas fa-angle-left"></i>
