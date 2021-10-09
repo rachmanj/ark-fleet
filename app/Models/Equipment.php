@@ -31,4 +31,10 @@ class Equipment extends Model
     {
         return $this->belongsTo(Project::class, 'current_project_id', 'id');
     }
+
+    public function ipas()
+    {
+        return $this->hasMany(MovingDetail::class);
+    }
+
 }

@@ -15,4 +15,9 @@ class MovingDetail extends Model
     {
         return $this->belongsTo(Equipment::class);
     }
+
+    public function moving()
+    {
+        return $this->belongsTo(Moving::class);
+    }
 }

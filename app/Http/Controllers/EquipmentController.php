@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEquipmentRequest;
 use App\Models\Category;
 use App\Models\Equipment;
+use App\Models\EquipmentDetail;
+use App\Models\MovingDetail;
 use App\Models\Project;
 use App\Models\Unitmodel;
 use App\Models\Unitstatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EquipmentController extends Controller
 {
@@ -29,17 +32,31 @@ class EquipmentController extends Controller
 
     public function store(StoreEquipmentRequest $request)
     {
-        // return $request;
-        // die;
-
         Equipment::create($request->validated());
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully added');
     }
 
-    public function show(Equipment $equipment)
+    public function show($id)
     {
-        return view('equipments.show', compact('equipment'));
+        $equipment = Equipment::with('unitmodel.manufacture', 'ipas.moving')->where('id', $id)->first();
+        
+        $ipas = DB::table('movings')
+                ->join('moving_details', 'movings.id', '=', 'moving_details.moving_id')
+                ->join('projects as p1', 'movings.from_project_id', '=', 'p1.id')
+                ->join('projects as p2', 'movings.to_project_id', '=', 'p2.id')
+                ->select(
+                    'movings.ipa_no',
+                    'movings.ipa_date',
+                    'moving_details.equipment_id as equipment_id',
+                    'p1.project_code as from_project',
+                    'p2.project_code as to_project',
+                )
+                ->where('equipment_id', $id)
+                ->orderBy('ipa_date', 'desc')
+                ->get();
+
+        return view('equipments.show', compact('equipment', 'ipas'));
     }
 
     public function edit(Equipment $equipment)
