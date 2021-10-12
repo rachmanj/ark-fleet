@@ -17,6 +17,7 @@ class Document extends Model
             'supplier_id',
             'amount',
             'due_date',
+            'remarks',
             'user_id',
         ];
             

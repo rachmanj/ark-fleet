@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEquipmentRequest;
 use App\Models\Category;
+use App\Models\Document;
 use App\Models\Equipment;
-use App\Models\EquipmentDetail;
-use App\Models\MovingDetail;
 use App\Models\Project;
 use App\Models\Unitmodel;
 use App\Models\Unitstatus;
@@ -39,24 +38,9 @@ class EquipmentController extends Controller
 
     public function show($id)
     {
-        $equipment = Equipment::with('unitmodel.manufacture', 'ipas.moving')->where('id', $id)->first();
-        
-        $ipas = DB::table('movings')
-                ->join('moving_details', 'movings.id', '=', 'moving_details.moving_id')
-                ->join('projects as p1', 'movings.from_project_id', '=', 'p1.id')
-                ->join('projects as p2', 'movings.to_project_id', '=', 'p2.id')
-                ->select(
-                    'movings.ipa_no',
-                    'movings.ipa_date',
-                    'moving_details.equipment_id as equipment_id',
-                    'p1.project_code as from_project',
-                    'p2.project_code as to_project',
-                )
-                ->where('equipment_id', $id)
-                ->orderBy('ipa_date', 'desc')
-                ->get();
+        $equipment = Equipment::with('unitmodel.manufacture')->where('id', $id)->first();
 
-        return view('equipments.show', compact('equipment', 'ipas'));
+        return view('equipments.show', compact('equipment'));
     }
 
     public function edit(Equipment $equipment)
@@ -108,5 +92,56 @@ class EquipmentController extends Controller
             ->addColumn('action', 'equipments.action')
             ->rawColumns(['action'])
             ->toJson();
+    }
+
+    public function equipment_movings_data($id)
+    {
+        $movings = DB::table('movings')
+                    ->join('moving_details', 'movings.id', '=', 'moving_details.moving_id')
+                    ->join('projects as p1', 'movings.from_project_id', '=', 'p1.id')
+                    ->join('projects as p2', 'movings.to_project_id', '=', 'p2.id')
+                    ->select(
+                        'movings.ipa_no',
+                        'movings.ipa_date',
+                        'moving_details.equipment_id as equipment_id',
+                        'p1.project_code as from_project',
+                        'p2.project_code as to_project',
+                    )
+                    ->where('equipment_id', $id)
+                    ->orderBy('ipa_date', 'desc')
+                    ->get();
+
+        return datatables()->of($movings)
+                    ->editColumn('ipa_date', function ($movings) {
+                        return date('d-M-Y', strtotime($movings->ipa_date));
+                    })
+                    ->addIndexColumn()
+                    ->toJson();
+    }
+
+    public function equipment_legals_data($id)
+    {
+        $documents = Document::with('document_type')->where('equipment_id', $id)
+                    ->where('document_type_id', 2)
+                    ->orderBy('document_date', 'desc')
+                    ->get();    // BPKB
+
+        return datatables()->of($documents)
+                    ->editColumn('document_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->document_date));
+                    })
+                    ->editColumn('due_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->due_date));
+                    })
+                    ->addColumn('doctype', function ($documents) {
+                        return $documents->document_type->name;
+                    })
+                    ->addColumn('amount', function ($documents) {
+                        return number_format($documents->amount, 0);
+                    })
+                    ->addIndexColumn()
+                    ->addColumn('action', 'equipments.tabs.legals_action')
+                    ->rawColumns(['action'])
+                    ->toJson();
     }
 }

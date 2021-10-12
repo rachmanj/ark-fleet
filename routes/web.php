@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HomeController;
@@ -25,6 +26,8 @@ Route::middleware('guest')->group(function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('equipments/data', [EquipmentController::class, 'index_data'])->name('equipments.index.data');
+    Route::get('equipments/{equipment}/movings/data', [EquipmentController::class, 'equipment_movings_data'])->name('equipments.movings.data');
+    Route::get('equipments/{equipment}/legals/data', [EquipmentController::class, 'equipment_legals_data'])->name('equipments.legals.data');
     Route::resource('equipments', EquipmentController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -50,6 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('unitstatuses/data', [UnitstatusController::class, 'index_data'])->name('unitstatuses.index.data');
     Route::resource('unitstatuses', UnitstatusController::class);
+
+    Route::get('documents/data', [DocumentController::class, 'index_data'])->name('documents.index.data');
+    Route::resource('documents', DocumentController::class);
 
     Route::get('movings/data', [MovingController::class, 'index_data'])->name('movings.index.data');
     Route::get('movings/{moving}/print_pdf', [MovingController::class, 'print_pdf'])->name('movings.print_pdf');
