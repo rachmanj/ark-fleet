@@ -14,11 +14,13 @@ class Moving extends Model
         'ipa_no',
         'from_project_id',
         'to_project_id',
-        'created_by',
-        'name1',
-        'name2',
-        'name3',
+        'tujuan_row_1',
+        'tujuan_row_2',
+        'cc_row_1',
+        'cc_row_2',
+        'cc_row_3',
         'remarks',
+        'created_by',
         'flag'
     ];
 

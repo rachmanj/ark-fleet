@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEquipmentRequest;
 use App\Models\Category;
 use App\Models\Document;
+use App\Models\DocumentType;
 use App\Models\Equipment;
 use App\Models\Project;
 use App\Models\Unitmodel;
@@ -31,7 +32,20 @@ class EquipmentController extends Controller
 
     public function store(StoreEquipmentRequest $request)
     {
-        Equipment::create($request->validated());
+        $this->validate($request, [
+            'unit_no'   => ['required', 'unique:equipments,unit_no'],
+        ]);
+
+        Equipment::create(array_merge($request->validated(), [
+            'unit_no' => $request->unit_no,
+            'serial_no' => $request->serial_no,
+            'chasis_no' => $request->chasis_no,
+            'machine_no' => $request->machine_no,
+            'engine_model' => $request->engine_model,
+            'no_polisi' => $request->no_polisi,
+            'bahan_bakar' => $request->bahan_bakar,
+            'color' => $request->body_color,
+        ]));
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully added');
     }
@@ -121,10 +135,12 @@ class EquipmentController extends Controller
 
     public function equipment_legals_data($id)
     {
+        $document_types = [2, 3]; // document type : BPKB dan STNK
+
         $documents = Document::with('document_type')->where('equipment_id', $id)
-                    ->where('document_type_id', 2)
+                    ->whereIn('document_type_id', $document_types)
                     ->orderBy('document_date', 'desc')
-                    ->get();    // BPKB
+                    ->get();
 
         return datatables()->of($documents)
                     ->editColumn('document_date', function ($documents) {
@@ -144,4 +160,95 @@ class EquipmentController extends Controller
                     ->rawColumns(['action'])
                     ->toJson();
     }
+
+    public function equipment_acquisitions_data($id)
+    {
+        $document_type = DocumentType::where('name', 'Purchase Order')->first();
+
+        $documents = Document::with('document_type')->where('equipment_id', $id)
+                    ->where('document_type_id', $document_type->id)
+                    ->orderBy('document_date', 'desc')
+                    ->get();
+
+        return datatables()->of($documents)
+                    ->editColumn('document_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->document_date));
+                    })
+                    ->editColumn('due_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->due_date));
+                    })
+                    ->addColumn('doctype', function ($documents) {
+                        return $documents->document_type->name;
+                    })
+                    ->addColumn('amount', function ($documents) {
+                        return number_format($documents->amount, 0);
+                    })
+                    ->addIndexColumn()
+                    ->addColumn('action', 'equipments.tabs.legals_action')
+                    ->rawColumns(['action'])
+                    ->toJson();
+    }
+
+    public function equipment_insurance_data($id)
+    {
+        $document_type = DocumentType::where('name', 'Polis Asuransi')->first();
+
+        $documents = Document::with('document_type')->where('equipment_id', $id)
+                    ->where('document_type_id', $document_type->id)
+                    ->orderBy('document_date', 'desc')
+                    ->get();
+
+        return datatables()->of($documents)
+                    ->editColumn('document_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->document_date));
+                    })
+                    ->editColumn('due_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->due_date));
+                    })
+                    ->addColumn('supplier', function ($documents) {
+                        return $documents->supplier->name;
+                    })
+                    ->addColumn('premi', function ($documents) {
+                        return number_format($documents->amount, 0);
+                    })
+                    ->addIndexColumn()
+                    ->addColumn('action', 'equipments.tabs.legals_action')
+                    ->rawColumns(['action'])
+                    ->toJson();
+    }
+
+    public function equipment_others_data($id)
+    {
+        $docs_exclude = [2, 3, 4, 6]; // not like : BPKB, STNK, Polis Asuransi, Purchase Order
+        foreach ($docs_exclude as $e) {
+            $docs_exclude_arr[] = ['document_type_id', 'not like', $e];
+        };
+
+        $documents = Document::with('document_type')->where('equipment_id', $id)
+                    ->where($docs_exclude_arr)
+                    ->orderBy('document_date', 'desc')
+                    ->get();
+
+        return datatables()->of($documents)
+                    ->editColumn('document_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->document_date));
+                    })
+                    ->editColumn('due_date', function ($documents) {
+                        return date('d-M-Y', strtotime($documents->due_date));
+                    })
+                    ->addColumn('doctype', function ($documents) {
+                        return $documents->document_type->name;
+                    })
+                    ->addColumn('supplier', function ($documents) {
+                        return $documents->supplier->name;
+                    })
+                    ->addColumn('amount', function ($documents) {
+                        return number_format($documents->amount, 0);
+                    })
+                    ->addIndexColumn()
+                    ->addColumn('action', 'equipments.tabs.legals_action')
+                    ->rawColumns(['action'])
+                    ->toJson();
+    }
+
 }

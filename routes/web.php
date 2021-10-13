@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('equipments/data', [EquipmentController::class, 'index_data'])->name('equipments.index.data');
     Route::get('equipments/{equipment}/movings/data', [EquipmentController::class, 'equipment_movings_data'])->name('equipments.movings.data');
     Route::get('equipments/{equipment}/legals/data', [EquipmentController::class, 'equipment_legals_data'])->name('equipments.legals.data');
+    Route::get('equipments/{equipment}/acquisitions/data', [EquipmentController::class, 'equipment_acquisitions_data'])->name('equipments.acquisitions.data');
+    Route::get('equipments/{equipment}/insurance/data', [EquipmentController::class, 'equipment_insurance_data'])->name('equipments.insurance.data');
+    Route::get('equipments/{equipment}/others/data', [EquipmentController::class, 'equipment_others_data'])->name('equipments.others.data');
     Route::resource('equipments', EquipmentController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

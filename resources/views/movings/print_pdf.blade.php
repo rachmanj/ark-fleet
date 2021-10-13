@@ -60,15 +60,15 @@
         <tr>
           <td>
             <div class="fw-bold">Kepada Yth.</div>
-            <p class="ms-3">OPERATIONAL DIRECTOR<br>BAPAK AGUS TRIYANTO<br>BALIKPAPAN</p>
+            <p class="ms-3">{{ $moving->tujuan_row_1 }}<br>{{ $moving->tujuan_row_2 }}</p>
           </td>
         </tr>
         <tr>
           <td>
             <div class="fw-bold">Cc.</div>
-            <p class="ms-3">- Bapak Yuwana (Direktur)<br>
-              - Bapak Agus Triyanto (Operation Manager)<br>
-              - Bapak Hendra Wijaya</p>
+            <p class="ms-3">- {{ $moving->cc_row_1 }}<br>
+              - {{ $moving->cc_row_2 }}<br>
+              - {{ $moving->cc_row_3 }}</p>
           </td>
         </tr>
       </table>
@@ -109,10 +109,13 @@
                 <td>{{ $equipment->equipment->unitmodel->manufacture->name }}</td>
               </tr>
           @endforeach
+              <tr>
+                <td colspan="3"><b>Remarks:</b> {{ $moving->remarks }} </td>
+              </tr>
         </tbody>
       </table>
 
-<hr>
+      <hr>
       <table width="100%" cellspacing="0">
         <tr>
           <td></td>

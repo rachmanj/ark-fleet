@@ -25,8 +25,13 @@ class MovingController extends Controller
 
     public function store(StoreMovingRequest $request)
     {
+        $this->validate($request, [
+            'ipa_no' => ['required', 'unique:movings,ipa_no']
+        ]);
+
         $moving_flag = 'DRAFT' . auth()->id();
         $moving = Moving::create(array_merge($request->validated(), [
+            'ipa_no' => $request->ipa_no,
             'flag' => $moving_flag,
             'created_by' => auth()->id()
         ]));
@@ -39,8 +44,7 @@ class MovingController extends Controller
     public function print_pdf($id)
     {
         $moving = Moving::with('equip_details.equipment')->where('id', $id)->first();
-        // return $moving;
-        // die;
+
         return view('movings.print_pdf', compact('moving'));
     }
 
@@ -51,12 +55,24 @@ class MovingController extends Controller
 
     public function edit(Moving $moving)
     {
-        //
+        $equipments = Equipment::with('unitmodel', 'current_project')->where('isActive', 1)->get();
+        $projects = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
+        
+        return view('movings.edit', compact('moving', 'equipments', 'projects'));
     }
 
-    public function update(StoreMovingRequest $request, Moving $moving)
+    public function update(StoreMovingRequest $request, $id)
     {
-        //
+        $data_tosave = $this->validate($request, [
+            'ipa_no' => ['required', 'unique:movings,ipa_no,' .$id]
+        ]);
+
+        $moving = Moving::find($id);
+        $moving->update(array_merge($request->validated(), [
+            $data_tosave
+        ]));
+
+        return redirect()->route('movings.index')->with('success', 'Data successfully updated');
     }
 
     public function destroy(Moving $moving)
@@ -66,7 +82,9 @@ class MovingController extends Controller
 
     public function index_data()
     {
-        $movings = Moving::orderBy('ipa_date', 'desc')->get();
+        $movings = Moving::orderBy('ipa_date', 'desc')
+                    ->orderBy('ipa_no', 'desc')
+                    ->get();
 
         return datatables()->of($movings)
                 ->editColumn('ipa_date', function ($movings) {

@@ -1,3 +1,15 @@
-<div class="tab-pane fade" id="custom-tabs-four-insurance" role="tabpanel" aria-labelledby="custom-tabs-four-insurance-tab">
-  Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+<div class="tab-pane fade active" id="custom-tabs-four-insurance" role="tabpanel" aria-labelledby="custom-tabs-four-insurance-tab">
+  <table id="insurance" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Polis No</th>
+        <th>Asuradur</th>
+        <th>Date</th>
+        <th>Due</th>
+        <th>Premi</th>
+        {{-- <th>action</th> --}}
+      </tr>
+    </thead>
+  </table>
 </div>

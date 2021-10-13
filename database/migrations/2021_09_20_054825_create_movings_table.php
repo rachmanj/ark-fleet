@@ -19,12 +19,14 @@ class CreateMovingsTable extends Migration
             $table->string('ipa_no');
             $table->foreignId('from_project_id');
             $table->foreignId('to_project_id');
-            $table->foreignId('created_by');
-            $table->string('name1')->nullable();
-            $table->string('name2')->nullable();
-            $table->string('name3')->nullable();
+            $table->string('tujuan_row_1')->nullable();
+            $table->string('tujuan_row_2')->nullable();
+            $table->string('cc_row_1')->nullable();
+            $table->string('cc_row_2')->nullable();
+            $table->string('cc_row_3')->nullable();
             $table->text('remarks')->nullable();
             $table->string('flag')->nullable();
+            $table->foreignId('created_by');
             $table->timestamps();
         });
     }

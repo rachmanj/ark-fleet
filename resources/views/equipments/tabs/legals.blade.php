@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="custom-tabs-four-legals" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+<div class="tab-pane fade active" id="custom-tabs-four-legals" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
   <table id="legals" class="table table-bordered table-striped">
     <thead>
       <tr>

@@ -38,16 +38,16 @@
                 <div class="card-header p-0 border-bottom-0">
                   <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="custom-tabs-four-movings-tab" data-toggle="pill" href="#custom-tabs-four-movings" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Movings</a>
+                      <a class="nav-link active" id="custom-tabs-four-movings-tab" data-toggle="pill" href="#custom-tabs-four-movings" role="tab" aria-controls="custom-tabs-four-movings" aria-selected="true">Movings</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="custom-tabs-four-acquisition-tab" data-toggle="pill" href="#custom-tabs-four-acquisition" role="tab" aria-controls="custom-tabs-four-acquisition" aria-selected="false">Acquisition</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="custom-tabs-four-insurance-tab" data-toggle="pill" href="#custom-tabs-four-insurance" role="tab" aria-controls="custom-tabs-four-insurance" aria-selected="false">Insurance</a>
+                      <a class="nav-link" id="custom-tabs-four-acquisitions-tab" data-toggle="pill" href="#custom-tabs-four-acquisitions" role="tab" aria-controls="custom-tabs-four-acquisitions" aria-selected="false">Acquisitions</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="custom-tabs-four-legals-tab" data-toggle="pill" href="#custom-tabs-four-legals" role="tab" aria-controls="custom-tabs-four-legals" aria-selected="false">Legal</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-four-insurance-tab" data-toggle="pill" href="#custom-tabs-four-insurance" role="tab" aria-controls="custom-tabs-four-insurance" aria-selected="false">Insurance</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="custom-tabs-four-others-tab" data-toggle="pill" href="#custom-tabs-four-others" role="tab" aria-controls="custom-tabs-four-others" aria-selected="false">Others</a>
@@ -61,9 +61,9 @@
 
                     @include('equipments.tabs.acquisition')
                     
-                    @include('equipments.tabs.insurance')
-                    
                     @include('equipments.tabs.legals')
+                    
+                    @include('equipments.tabs.insurance')
                     
                     @include('equipments.tabs.others')
 
@@ -117,7 +117,7 @@
           // {data: 'action'},
         ],
         fixedHeader: true,
-      })
+      });
       $("#legals").DataTable({
         processing: true,
         serverSide: true,
@@ -135,6 +135,69 @@
         columnDefs: [
           {
             "targets": 5,
+            "className": "text-right"
+          }
+        ],
+      });
+      $("#acquisitions").DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('equipments.acquisitions.data', $equipment->id) }}',
+        columns: [
+          {data: 'DT_RowIndex', orderable: false, searchable: false},
+          {data: 'document_no'},
+          {data: 'doctype'},
+          {data: 'document_date'},
+          {data: 'amount'},
+          // {data: 'action'},
+        ],
+        fixedHeader: true,
+        columnDefs: [
+          {
+            "targets": 4,
+            "className": "text-right"
+          }
+        ],
+      })
+      $("#insurance").DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('equipments.insurance.data', $equipment->id) }}',
+        columns: [
+          {data: 'DT_RowIndex', orderable: false, searchable: false},
+          {data: 'document_no'},
+          {data: 'supplier'},
+          {data: 'document_date'},
+          {data: 'due_date'},
+          {data: 'premi'},
+          // {data: 'action'},
+        ],
+        fixedHeader: true,
+        columnDefs: [
+          {
+            "targets": 5,
+            "className": "text-right"
+          }
+        ],
+      })
+      $("#others").DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('equipments.others.data', $equipment->id) }}',
+        columns: [
+          {data: 'DT_RowIndex', orderable: false, searchable: false},
+          {data: 'document_no'},
+          {data: 'doctype'},
+          {data: 'supplier'},
+          {data: 'document_date'},
+          {data: 'due_date'},
+          {data: 'amount'},
+          // {data: 'action'},
+        ],
+        fixedHeader: true,
+        columnDefs: [
+          {
+            "targets": 6,
             "className": "text-right"
           }
         ],

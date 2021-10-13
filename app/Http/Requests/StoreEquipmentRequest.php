@@ -24,7 +24,6 @@ class StoreEquipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'unit_no'   => ['required', 'unique:equipments,unit_no'],
             'description'   => ['required'],
             'unitmodel_id'   => ['required'],
             'category_id'   => ['required'],

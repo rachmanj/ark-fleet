@@ -100,9 +100,8 @@
                   <div class="form-group">
                     <label>Category</label>
                     <select name="category_id" class="form-control select2bs4 @error('category_id') is-invalid @enderror">
-                      <option value="">-- select category --</option>
                       @foreach ($categories as $category)
-                          <option value="{{ $category->id }}">{{ $category->name }}</option>
+                          <option value="{{ $category->id }} {{ old('category_id') == $category->id || $equipment->category_id == $category->id ? 'selected' : '' }}">{{ $category->name }}</option>
                       @endforeach
                     </select>
                     @error('category_id')
@@ -118,7 +117,7 @@
                     <select name="unitstatus_id" class="form-control select2bs4 @error('unitstatus_id') is-invalid @enderror">
                       <option value="">-- select status --</option>
                       @foreach ($unitstatuses as $unitstatus)
-                          <option value="{{ $unitstatus->id }}">{{ $unitstatus->name }}</option>
+                          <option value="{{ $unitstatus->id }}" {{ old('unitstatus_id') == $unitstatus->id || $equipment->unitstatus_id == $unitstatus->id ? 'selected' : '' }} >{{ $unitstatus->name }}</option>
                       @endforeach
                     </select>
                     @error('unitstatus_id')
