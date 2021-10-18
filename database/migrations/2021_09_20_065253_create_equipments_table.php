@@ -18,7 +18,8 @@ class CreateEquipmentsTable extends Migration
             $table->string('unit_no');
             $table->string('description')->nullable();
             $table->foreignId('unitmodel_id')->nullable();
-            $table->foreignId('category_id')->nullable(); // digger or hauler or anything else
+            $table->foreignId('asset_category_id')->nullable(); // digger or hauler or anything else
+            $table->foreignId('plant_type_id')->nullable(); // digger or hauler or anything else
             $table->foreignId('unitstatus_id')->nullable();
             $table->foreignId('current_project_id')->nullable(); //lokasi alat saat ini
             $table->string('serial_no')->nullable();
@@ -30,7 +31,9 @@ class CreateEquipmentsTable extends Migration
             $table->string('warna')->nullable(); //warna kendaraan
             $table->string('unit_pic')->nullable();
             $table->string('cart_flag')->nullable(); // cart pada saat transaksi perpindahan alat (IPA)
-            $table->integer('active')->default(0); // 1 = active, 0 = in-active
+            $table->foreignId('assign_to')->nullable(); //pemegang alat
+            $table->text('remarks')->nullable(); // catatan lain yg belum tercantum dalam field2
+            $table->foreignId('created_by')->nullable(); // created_by
             $table->softDeletes();
             $table->timestamps();
         });

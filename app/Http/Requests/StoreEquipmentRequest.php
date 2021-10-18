@@ -24,11 +24,12 @@ class StoreEquipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'description'   => ['required'],
-            'unitmodel_id'   => ['required'],
-            'category_id'   => ['required'],
-            'unitstatus_id'   => ['required'],
-            'current_project_id'   => ['required'],
+            'description' => ['required'],
+            'unitmodel_id' => ['required'],
+            'plant_type_id' => ['required'],
+            'asset_category_id' => ['required'],
+            'unitstatus_id' => ['required'],
+            'current_project_id' => ['required'],
         ];
     }
 }

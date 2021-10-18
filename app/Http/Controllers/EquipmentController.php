@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEquipmentRequest;
+use App\Models\AssetCategory;
 use App\Models\Category;
 use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\Equipment;
+use App\Models\PlantType;
 use App\Models\Project;
 use App\Models\Unitmodel;
 use App\Models\Unitstatus;
@@ -24,10 +26,11 @@ class EquipmentController extends Controller
     {
         $projects   = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
         $unitmodels = Unitmodel::with('manufacture')->orderBy('model_no', 'asc')->get();
-        $categories = Category::orderBy('name')->get();
+        $plant_types = PlantType::orderby('name', 'asc')->get();
+        $asset_categories = AssetCategory::orderBy('name')->get();
         $unitstatuses   = Unitstatus::orderBy('name')->get();
         
-        return view('equipments.create', compact('projects', 'unitmodels', 'categories', 'unitstatuses'));
+        return view('equipments.create', compact('projects', 'unitmodels', 'plant_types', 'asset_categories', 'unitstatuses'));
     }
 
     public function store(StoreEquipmentRequest $request)
@@ -38,13 +41,6 @@ class EquipmentController extends Controller
 
         Equipment::create(array_merge($request->validated(), [
             'unit_no' => $request->unit_no,
-            'serial_no' => $request->serial_no,
-            'chasis_no' => $request->chasis_no,
-            'machine_no' => $request->machine_no,
-            'engine_model' => $request->engine_model,
-            'no_polisi' => $request->no_polisi,
-            'bahan_bakar' => $request->bahan_bakar,
-            'color' => $request->body_color,
         ]));
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully added');
@@ -61,23 +57,57 @@ class EquipmentController extends Controller
     {
         $projects   = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
         $unitmodels = Unitmodel::with('manufacture')->orderBy('model_no', 'asc')->get();
-        $categories = Category::orderBy('name')->get();
+        $plant_types = PlantType::orderby('name', 'asc')->get();
+        $asset_categories = AssetCategory::orderBy('name')->get();
         $unitstatuses   = Unitstatus::orderBy('name')->get();
         
-        return view('equipments.edit', compact('equipment', 'projects', 'unitmodels', 'categories', 'unitstatuses'));
+        return view('equipments.edit', compact('equipment', 'projects', 'unitmodels', 'plant_types', 'asset_categories', 'unitstatuses'));
     }
 
-    public function update(StoreEquipmentRequest $request, Equipment $equipment)
+    public function update(StoreEquipmentRequest $request, $id)
     {
+        $this->validate($request, [
+            'unit_no'   => ['required', 'unique:equipments,unit_no,' .$id],
+        ]);
+
+        $equipment = Equipment::find($id);
+
         $equipment->update(array_merge($request->validated(), [
+            'unit_no'       => $request->unit_no,
             'serial_no'     => $request->serial_no,
             'chasis_no'     => $request->chasis_no,
             'machine_no'    => $request->machine_no,
             'nomor_polisi'  => $request->nomor_polisi,
             'warna'         => $request->warna,
-            'bahan_bakar'   => $request->bahan_bakar,
+            'engine_model'  => $request->engine_model,
             'bahan_bakar'   => $request->bahan_bakar,
         ]));
+
+        return redirect()->route('equipments.index')->with('success', 'Data successfully updated');
+    }
+
+    public function edit_detail(Equipment $equipment)
+    {
+        return view('equipments.edit_detail', compact('equipment'));
+    }
+
+    public function update_detail(Request $request, $id)
+    {
+        $equipment = Equipment::find($id);
+
+        $equipment->update([
+            'unit_no'       => $request->unit_no,
+            'serial_no'     => $request->serial_no,
+            'chasis_no'     => $request->chasis_no,
+            'machine_no'    => $request->machine_no,
+            'nomor_polisi'  => $request->nomor_polisi,
+            'warna'         => $request->warna,
+            'engine_model'  => $request->engine_model,
+            'bahan_bakar'   => $request->bahan_bakar,  
+            'remarks'       => $request->remarks,  
+        ]);
+
+        return redirect()->route('equipments.index')->with('success', 'Data successfully updated');
     }
 
     public function destroy(Equipment $equipment)
@@ -89,15 +119,18 @@ class EquipmentController extends Controller
 
     public function index_data()
     {
-        $equipments = Equipment::with('unitmodel', 'current_project', 'category')
+        $equipments = Equipment::with('unitmodel.manufacture', 'current_project', 'plant_type')
                         ->orderBy('unit_no', 'asc')->get();
 
         return datatables()->of($equipments)
             ->addColumn('model', function($equipments) {
                 return $equipments->unitmodel->model_no;
             })
-            ->addColumn('category', function($equipments) {
-                return $equipments->category->name;
+            ->addColumn('manufacture', function ($equipments) {
+                return $equipments->unitmodel->manufacture->name;
+            })
+            ->addColumn('plant_type', function($equipments) {
+                return $equipments->plant_type->name;
             })
             ->addColumn('current_project', function($equipments) {
                 return $equipments->current_project->project_code;
@@ -135,10 +168,13 @@ class EquipmentController extends Controller
 
     public function equipment_legals_data($id)
     {
-        $document_types = [2, 3]; // document type : BPKB dan STNK
+        $docs_include_name = ['BPKB', 'STNK']; // document type : BPKB dan STNK
+        foreach ($docs_include_name as $n) { // mencari ID dari dokumen2 exclude
+            $docs_include_id_arr[] = DocumentType::where('name', $n)->first()->id;
+        }
 
         $documents = Document::with('document_type')->where('equipment_id', $id)
-                    ->whereIn('document_type_id', $document_types)
+                    ->whereIn('document_type_id', $docs_include_id_arr)
                     ->orderBy('document_date', 'desc')
                     ->get();
 
@@ -219,8 +255,17 @@ class EquipmentController extends Controller
 
     public function equipment_others_data($id)
     {
-        $docs_exclude = [2, 3, 4, 6]; // not like : BPKB, STNK, Polis Asuransi, Purchase Order
-        foreach ($docs_exclude as $e) {
+        $docs_exclude_name = [  // jenis dokumen selain yg disebutkan di sini
+            'BPKB',
+            'STNK', 
+            'Polis Asuransi', 
+            'Purchase Order'
+        ];
+        foreach ($docs_exclude_name as $n) { // mencari ID dari dokumen2 exclude
+            $docs_exclude_id_arr[] = DocumentType::where('name', $n)->first()->id;
+        }
+
+        foreach ($docs_exclude_id_arr as $e) {
             $docs_exclude_arr[] = ['document_type_id', 'not like', $e];
         };
 

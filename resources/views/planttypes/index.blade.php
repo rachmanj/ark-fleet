@@ -1,11 +1,11 @@
 @extends('templates.main')
 
 @section('title_page')
-    Equipments
+    Plant Types
 @endsection
 
 @section('breadcrumb_title')
-    equipments
+    planttype
 @endsection
 
 @section('content')
@@ -20,19 +20,15 @@
                 {{ Session::get('success') }}
               </div>
             @endif
-            <a href="{{ route('equipments.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Equipment</a>
+            <a href="{{ route('planttypes.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Plant Type</a>
           </div> {{-- card-header --}}
 
           <div class="card-body">
-            <table id="equipments" class="table table-bordered table-striped">
+            <table id="planttypes" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Unit No</th>
-                  <th>Model</th>
-                  <th>Manufacture</th>
-                  <th>Type</th>
-                  <th>Location</th>
+                  <th>Name</th>
                   <th>action</th>
                 </tr>
               </thead>
@@ -61,17 +57,13 @@
 
   <script>
     $(function () {
-      $("#equipments").DataTable({
+      $("#planttypes").DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('equipments.index.data') }}',
+        ajax: '{{ route('planttypes.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
-          {data: 'unit_no'},
-          {data: 'model'},
-          {data: 'manufacture'},
-          {data: 'plant_type'},
-          {data: 'current_project'},
+          {data: 'name'},
           {data: 'action'},
         ],
         fixedHeader: true,

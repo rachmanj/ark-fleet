@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssetCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocumentTypeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\MovingController;
 use App\Http\Controllers\MovingDetailController;
+use App\Http\Controllers\PlantTypeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SupplierController;
@@ -31,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('equipments/{equipment}/acquisitions/data', [EquipmentController::class, 'equipment_acquisitions_data'])->name('equipments.acquisitions.data');
     Route::get('equipments/{equipment}/insurance/data', [EquipmentController::class, 'equipment_insurance_data'])->name('equipments.insurance.data');
     Route::get('equipments/{equipment}/others/data', [EquipmentController::class, 'equipment_others_data'])->name('equipments.others.data');
+    Route::get('equipments/{equipment}/edit_detail', [EquipmentController::class, 'edit_detail'])->name('equipments.edit_detail');
+    Route::put('equipments/{equipment}/update_detail', [EquipmentController::class, 'update_detail'])->name('equipments.update_detail');
     Route::resource('equipments', EquipmentController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -71,6 +75,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('moving_details', [MovingDetailController::class, 'store'])->name('moving_details.store');
     Route::patch('moving_details/{equipment_id}/add_tocart', [MovingDetailController::class, 'add_tocart'])->name('moving_details.add_tocart');
     Route::patch('moving_details/{equipment_id}/remove_fromcart', [MovingDetailController::class, 'remove_fromcart'])->name('moving_details.remove_fromcart');
+
+    Route::get('planttypes/data', [PlantTypeController::class, 'index_data'])->name('planttypes.index.data');
+    Route::resource('planttypes', PlantTypeController::class);
+
+    Route::get('asset_categories/data', [AssetCategoryController::class, 'index_data'])->name('asset_categories.index.data');
+    Route::resource('asset_categories', AssetCategoryController::class);
 });
 
 Route::get('/model_detail', [UnitmodelController::class, 'get_model_detail'])->name('get_model_detail');

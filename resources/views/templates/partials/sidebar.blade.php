@@ -34,10 +34,12 @@
 
         <li class="nav-header">MASTER DATA</li>
 
-        @include('templates.partials.menu.categories')
+        {{-- @include('templates.partials.menu.categories') --}}
+        @include('templates.partials.menu.asset_categories')
         @include('templates.partials.menu.doctypes')
         @include('templates.partials.menu.manufacture')
         @include('templates.partials.menu.project')
+        @include('templates.partials.menu.planttypes')
         @include('templates.partials.menu.suppliers')
         @include('templates.partials.menu.unitmodel')
         @include('templates.partials.menu.unitstatus')

@@ -28,10 +28,6 @@ class StoreDocumentRequest extends FormRequest
             'document_type_id' => ['required'],
             'document_no' => ['required'],
             'document_date' => ['required'],
-            'supplier_id' => ['integer'],
-            'amount' => ['integer'],
-            'due_date' => ['date'],
-            'remarks' => ['string']
         ];
     }
 }

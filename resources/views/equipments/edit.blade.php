@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumb_title')
-    equipments
+    <a href="{{ route('equipments.index') }}">equipments</a>
 @endsection
 
 @section('content')
@@ -50,13 +50,13 @@
                 <div class="col-4">
                   <div class="form-group">
                     <label>Model</label>
-                    <select name="model_id" id="model_id" class="form-control select2bs4 @error('model_id') is-invalid @enderror">
+                    <select name="unitmodel_id" id="unitmodel_id" class="form-control select2bs4 @error('unitmodel_id') is-invalid @enderror">
                       <option value="">-- select unit model --</option>
                       @foreach ($unitmodels as $unitmodel)
-                          <option value="{{ $unitmodel->id }}" {{ $equipment->unitmodel_id == $unitmodel->id ? 'selected' : '' }}>{{ $unitmodel->model_no . ' - ' . $unitmodel->manufacture->name }}</option>
+                          <option value="{{ $unitmodel->id }}" {{ $equipment->unitmodel_id == $unitmodel->id ? 'selected' : '' }}  >{{ $unitmodel->model_no . ' - ' . $unitmodel->manufacture->name }}</option>
                       @endforeach
                     </select>
-                    @error('model_id')
+                    @error('unitmodel_id')
                       <div class="invalid-feedback">
                         {{ $message }}
                       </div>
@@ -67,26 +67,26 @@
                 <div class="col-4">
                   <div class="form-group">
                     <label for="">Manufacture</label>
-                    <input type="text" id="manufacture" class="form-control" value="{{ $equipment->unitmodel->manufacture->name }}" readonly>
+                    <input type="text" id="manufacture" value="{{ $equipment->unitmodel->manufacture->name }}" class="form-control" >
                   </div>
                 </div>
   
                 <div class="col-4">
                   <div class="form-group">
                     <label for="">Model Desc</label>
-                    <input type="text" id="model_desc" class="form-control" value="{{ $equipment->unitmodel->description }}" readonly>
+                    <input type="text" id="model_desc" value="{{ $equipment->unitmodel->description }}" class="form-control" >
                   </div>
                 </div>
               </div> {{-- row --}}
 
               <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                   <div class="form-group">
                     <label>Current Project</label>
                     <select name="current_project_id" class="form-control select2bs4 @error('current_project_id') is-invalid @enderror">
                       <option value="">-- select current project --</option>
                       @foreach ($projects as $project)
-                          <option value="{{ $project->id }}" {{ $equipment->current_project_id == $project->id ? 'selected' : '' }}>{{ $project->project_code . ' - ' . $project->location }}</option>
+                          <option value="{{ $project->id }}" {{ $equipment->current_project_id == $project->id ? 'selected' : '' }} >{{ $project->project_code . ' - ' . $project->location }}</option>
                       @endforeach
                     </select>
                     @error('current_project_id')
@@ -96,28 +96,45 @@
                     @enderror
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <div class="form-group">
-                    <label>Category</label>
-                    <select name="category_id" class="form-control select2bs4 @error('category_id') is-invalid @enderror">
-                      @foreach ($categories as $category)
-                          <option value="{{ $category->id }} {{ old('category_id') == $category->id || $equipment->category_id == $category->id ? 'selected' : '' }}">{{ $category->name }}</option>
+                    <label>Plant Type</label>
+                    <select name="plant_type_id" class="form-control select2bs4 @error('plant_type_id') is-invalid @enderror">
+                      <option value="">-- select plant type --</option>
+                      @foreach ($plant_types as $plant_type)
+                          <option value="{{ $plant_type->id }}" {{ old('plant_type_id') == $plant_type->id ||  $equipment->plant_type_id == $plant_type->id ? 'selected' : '' }}>{{ $plant_type->name }}</option>
                       @endforeach
                     </select>
-                    @error('category_id')
+                    @error('plant_type_id')
                       <div class="invalid-feedback">
                         {{ $message }}
                       </div>
                     @enderror
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
+                  <div class="form-group">
+                    <label>Asset Category</label>
+                    <select name="asset_category_id" class="form-control select2bs4 @error('asset_category_id') is-invalid @enderror">
+                      <option value="">-- select asset category --</option>
+                      @foreach ($asset_categories as $asset_category)
+                          <option value="{{ $asset_category->id }}" {{ $equipment->asset_category_id == $asset_category->id ? 'selected' : '' }}>{{ $asset_category->name }}</option>
+                      @endforeach
+                    </select>
+                    @error('asset_category_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-3">
                   <div class="form-group">
                     <label>Status</label>
                     <select name="unitstatus_id" class="form-control select2bs4 @error('unitstatus_id') is-invalid @enderror">
                       <option value="">-- select status --</option>
                       @foreach ($unitstatuses as $unitstatus)
-                          <option value="{{ $unitstatus->id }}" {{ old('unitstatus_id') == $unitstatus->id || $equipment->unitstatus_id == $unitstatus->id ? 'selected' : '' }} >{{ $unitstatus->name }}</option>
+                          <option value="{{ $unitstatus->id }}" {{ $equipment->unitstatus_id == $unitstatus->id ? 'selected' : '' }} >{{ $unitstatus->name }}</option>
                       @endforeach
                     </select>
                     @error('unitstatus_id')
@@ -133,6 +150,7 @@
             </div> {{-- card-body --}}
   
             <div class="card-footer">
+              <a href="{{ route('equipments.index') }}" class="btn btn-sm btn-success"><i class="fas fa-undo"></i> Back</a>
               <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Save</button>
             </div>
           </form>
@@ -152,9 +170,9 @@
     <!-- Select2 -->
   <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
   <script>
-    $("#model_id").change(function() {
+    $("#unitmodel_id").change(function() {
       $.ajax({
-        url: "{{ route('get_model_detail') }}?model_id=" + $(this).val(),
+        url: "{{ route('get_model_detail') }}?unitmodel_id=" + $(this).val(),
         method: 'GET',
         success: function(data) {
           $('#manufacture').val(data.manufacture);

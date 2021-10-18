@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumb_title')
-    equipments
+<a href="{{ route('equipments.index') }}">equipments</a>
 @endsection
 
 @section('content')
@@ -21,18 +21,8 @@
             
             <div class="card-body">
 
-              <dl class="row">
-                <dt class="col-sm-4">Unit No</dt>
-                <dd class="col-sm-8">{{ $equipment->unit_no }}</dd>
-                <dt class="col-sm-4">Description</dt>
-                <dd class="col-sm-8">{{ $equipment->description }}</dd>
-                <dt class="col-sm-4">Model</dt>
-                <dd class="col-sm-8">{{ $equipment->unitmodel->model_no . ' | ' . $equipment->unitmodel->description}}</dd>
-                <dt class="col-sm-4">Manufacture</dt>
-                <dd class="col-sm-8">{{ $equipment->unitmodel->manufacture->name }}</dd>
-                <dt class="col-sm-4">Location</dt>
-                <dd class="col-sm-8">{{ $equipment->current_project->project_code . ' - ' . $equipment->current_project->bowheer .', '. $equipment->current_project->location }}</dd>
-              </dl>
+              @include('equipments.show_info')
+
               <hr>
               <div class="card card-primary card-outline card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">

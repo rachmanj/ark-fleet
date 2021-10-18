@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumb_title')
-    equipments
+<a href="{{ route('equipments.index') }}">equipments</a>
 @endsection
 
 @section('content')
@@ -80,7 +80,7 @@
               </div> {{-- row --}}
 
               <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                   <div class="form-group">
                     <label>Current Project</label>
                     <select name="current_project_id" class="form-control select2bs4 @error('current_project_id') is-invalid @enderror">
@@ -96,13 +96,29 @@
                     @enderror
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <div class="form-group">
-                    <label>Category</label>
-                    <select name="category_id" class="form-control select2bs4 @error('category_id') is-invalid @enderror">
-                      <option value="">-- select category --</option>
-                      @foreach ($categories as $category)
-                          <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <label>Plant Type</label>
+                    <select name="plant_type_id" class="form-control select2bs4 @error('plant_type_id') is-invalid @enderror">
+                      <option value="">-- select plant type --</option>
+                      @foreach ($plant_types as $plant_type)
+                          <option value="{{ $plant_type->id }}">{{ $plant_type->name }}</option>
+                      @endforeach
+                    </select>
+                    @error('plant_type_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <label>Asset Category</label>
+                    <select name="asset_category_id" class="form-control select2bs4 @error('category_id') is-invalid @enderror">
+                      <option value="">-- select asset category --</option>
+                      @foreach ($asset_categories as $asset_category)
+                          <option value="{{ $asset_category->id }}">{{ $asset_category->name }}</option>
                       @endforeach
                     </select>
                     @error('category_id')
@@ -112,7 +128,7 @@
                     @enderror
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <div class="form-group">
                     <label>Status</label>
                     <select name="unitstatus_id" class="form-control select2bs4 @error('unitstatus_id') is-invalid @enderror">
@@ -153,9 +169,9 @@
     <!-- Select2 -->
   <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
   <script>
-    $("#model_id").change(function() {
+    $("#unitmodel_id").change(function() {
       $.ajax({
-        url: "{{ route('get_model_detail') }}?model_id=" + $(this).val(),
+        url: "{{ route('get_model_detail') }}?unitmodel_id=" + $(this).val(),
         method: 'GET',
         success: function(data) {
           $('#manufacture').val(data.manufacture);

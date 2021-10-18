@@ -110,13 +110,13 @@ class UnitmodelController extends Controller
 
     public function get_model_detail(Request $request)
     {
-        if(!$request->model_id) {
+        if(!$request->unitmodel_id) {
             $manufacture = '';
             $model_desc = '';
         } else {
             $manufacture = '';
             $model_desc = '';
-            $model = Unitmodel::with('manufacture')->where('id', $request->model_id)->first();
+            $model = Unitmodel::with('manufacture')->where('id', $request->unitmodel_id)->first();
             $manufacture .= $model->manufacture->name;
             $model_desc .= $model->description;
         }

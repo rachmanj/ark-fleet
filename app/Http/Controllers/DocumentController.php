@@ -44,6 +44,10 @@ class DocumentController extends Controller
     public function store(StoreDocumentRequest $request)
     {
         Document::create(array_merge($request->validated(), [
+            'due_date' => $request->due_date,
+            'supplier_id' => $request->supplier_id,
+            'amount' => $request->amount,
+            'remarks' => $request->remarks,
             'user_id' => auth()->id()
         ]));
         return redirect()->route('documents.index')->with('success', 'Data succesfully added');
@@ -84,7 +88,12 @@ class DocumentController extends Controller
      */
     public function update(StoreDocumentRequest $request, Document $document)
     {
-        $document->update($request->validated());
+        $document->update(array_merge($request->validated(), [
+            'due_date' => $request->due_date,
+            'supplier_id' => $request->supplier_id,
+            'amount' => $request->amount,
+            'remarks' => $request->remarks,
+        ]));;
         return redirect()->route('documents.index')->with('success', 'Data succesfully updated');
     }
 

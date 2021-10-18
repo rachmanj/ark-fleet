@@ -47,4 +47,14 @@ class Equipment extends Model
         return $this->hasMany(MovingDetail::class);
     }
 
+    public function plant_type()
+    {
+        return $this->belongsTo(PlantType::class);
+    }
+
+    public function asset_category()
+    {
+        return $this->belongsTo(AssetCategory::class);
+    }
+
 }
