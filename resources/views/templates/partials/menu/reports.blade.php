@@ -1,5 +1,5 @@
 <li class="nav-item">
-  <a href="{{ route('categories.index') }}" class="nav-link {{ request()->is('categories') || request()->is('categories/*') ? 'active' : '' }}">
+  <a href="{{ route('reports.index') }}" class="nav-link {{ request()->is('reports') || request()->is('reports/*') ? 'active' : '' }}">
     <i class="fas fa-print"></i>
     <p>
       Reports

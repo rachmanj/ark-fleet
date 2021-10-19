@@ -23,6 +23,7 @@ class CreateDocumentsTable extends Migration
             $table->bigInteger('amount')->nullable(); //biaya yg dikeluarkan utk pengurusan, incl vat (if any)
             $table->date('due_date')->nullable(); // expire date
             $table->string('remarks')->nullable();
+            $table->integer('extended_doc_id')->nullable();
             $table->foreignId('user_id'); //created by
             $table->softDeletes();
             $table->timestamps();

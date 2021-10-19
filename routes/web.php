@@ -13,6 +13,7 @@ use App\Http\Controllers\MovingDetailController;
 use App\Http\Controllers\PlantTypeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitmodelController;
 use App\Http\Controllers\UnitstatusController;
@@ -62,6 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('unitstatuses', UnitstatusController::class);
 
     Route::get('documents/data', [DocumentController::class, 'index_data'])->name('documents.index.data');
+    Route::get('documents/{id}/extends', [DocumentController::class, 'extends_edit'])->name('documents.extends_edit');
+    Route::put('documents/{id}/extends', [DocumentController::class, 'extends_update'])->name('documents.extends_update');
     Route::resource('documents', DocumentController::class);
 
     Route::get('movings/data', [MovingController::class, 'index_data'])->name('movings.index.data');
@@ -81,6 +84,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('asset_categories/data', [AssetCategoryController::class, 'index_data'])->name('asset_categories.index.data');
     Route::resource('asset_categories', AssetCategoryController::class);
+
+    Route::get('reports/with_overdue/data', [ReportController::class, 'document_with_overdue_data'])->name('reports.document_with_overdue_data');
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('reports/with_overdue', [ReportController::class, 'document_with_overdue'])->name('reports.document_with_overdue');
+    Route::get('reports/with_overdue/{document}', [ReportController::class, 'document_with_overdue'])->name('reports.overdue_edit');
 });
 
 Route::get('/model_detail', [UnitmodelController::class, 'get_model_detail'])->name('get_model_detail');

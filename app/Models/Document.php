@@ -18,6 +18,7 @@ class Document extends Model
             'amount',
             'due_date',
             'remarks',
+            'extended_doc_id',
             'user_id',
         ];
             
