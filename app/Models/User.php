@@ -23,7 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'project_id',
-        'role_id',
+        'role',
         'password'
     ];
 
@@ -45,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

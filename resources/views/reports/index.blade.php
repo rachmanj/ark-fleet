@@ -19,9 +19,15 @@
 
           <div class="card-body">
             <ol>
-              <li><a href="{{ route('reports.document_with_overdue') }}">Documents yang akan jatuh tempo</a></li>
-              <li>Consectetur adipiscing elit</li>
-              <li>Eget porttitor lorem</li>
+              <li><b>Equipment</b></li>
+              <ol>
+                <li>Equipment by Projects</li>
+              </ol>
+              <li><b>Documents</b></li>
+              <ol>
+                <li><a href="{{ route('reports.document_with_overdue') }}">Documents yang akan jatuh tempo</a></li>
+              </ol>
+              <li><b>Movings</b></li>
             </ol>
           </div> {{-- card-body --}}
         </div> {{-- card --}}

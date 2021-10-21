@@ -17,6 +17,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitmodelController;
 use App\Http\Controllers\UnitstatusController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -89,6 +90,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/with_overdue', [ReportController::class, 'document_with_overdue'])->name('reports.document_with_overdue');
     Route::get('reports/with_overdue/{document}', [ReportController::class, 'document_with_overdue'])->name('reports.overdue_edit');
+
+    //Users
+    Route::get('/admin/activate', [UserController::class, 'activate_index'])->name('user.activate_index');
+    Route::put('/admin/activate/{id}', [UserController::class, 'activate_update'])->name('user.activate_update');
+    Route::get('/admin/deactivate', [UserController::class, 'deactivate_index'])->name('user.deactivate_index');
+    Route::put('/admin/deactivate/{id}', [UserController::class, 'deactivate_update'])->name('user.deactivate_update');
+    Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/admin/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('users.update');
+    
+    Route::get('/admin/users/index/data', [UserController::class, 'index_data'])->name('users.index.data');
+    Route::get('/admin/users/activate/data', [UserController::class, 'user_activate_data'])->name('user_activate.data');
+    Route::get('/admin/users/deactivate/data', [UserController::class, 'user_deactivate_data'])->name('user_deactivate.data');
+
 });
 
 Route::get('/model_detail', [UnitmodelController::class, 'get_model_detail'])->name('get_model_detail');
