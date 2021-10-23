@@ -11,6 +11,7 @@ use App\Models\Equipment;
 use App\Models\PlantType;
 use App\Models\Project;
 use App\Models\Unitmodel;
+use App\Models\UnitnoHistory;
 use App\Models\Unitstatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -294,6 +295,18 @@ class EquipmentController extends Controller
                     ->addColumn('action', 'equipments.tabs.legals_action')
                     ->rawColumns(['action'])
                     ->toJson();
+    }
+
+    public function equipment_changes_data($id)
+    {
+        $histories = UnitnoHistory::where('equipment_id', $id)->orderBy('date', 'desc')->get();
+
+        return datatables()->of($histories)
+                ->editColumn('date', function ($histories) {
+                    return date('d-M-Y', strtotime($histories->date));
+                })
+                ->addIndexColumn()
+                ->toJson();
     }
 
 }

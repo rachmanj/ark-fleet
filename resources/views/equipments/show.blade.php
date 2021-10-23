@@ -15,6 +15,7 @@
 
           <div class="card-header">
             <h3 class="card-title">Equipment Data</h3>
+            <a href="{{ route('equipments.index') }}" class="btn btn-sm btn-primary float-right"><i class="fas fa-undo"></i>  Back</a>
           </div> {{-- card-header --}}
 
           <form>
@@ -42,6 +43,9 @@
                     <li class="nav-item">
                       <a class="nav-link" id="custom-tabs-four-others-tab" data-toggle="pill" href="#custom-tabs-four-others" role="tab" aria-controls="custom-tabs-four-others" aria-selected="false">Others</a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-four-changes-tab" data-toggle="pill" href="#custom-tabs-four-changes" role="tab" aria-controls="custom-tabs-four-changes" aria-selected="false">Changes</a>
+                    </li>
                   </ul>
                 </div>
                 <div class="card-body">
@@ -56,6 +60,8 @@
                     @include('equipments.tabs.insurance')
                     
                     @include('equipments.tabs.others')
+
+                    @include('equipments.tabs.changes')
 
                   </div>
                 </div>
@@ -191,6 +197,19 @@
             "className": "text-right"
           }
         ],
+      })
+      $("#changes").DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('equipments.changes.data', $equipment->id) }}',
+        columns: [
+          {data: 'DT_RowIndex', orderable: false, searchable: false},
+          {data: 'date'},
+          {data: 'old_unit_no'},
+          {data: 'new_unit_no'},
+          // {data: 'action'},
+        ],
+        fixedHeader: true,
       })
     });
   </script>

@@ -57,4 +57,9 @@ class Equipment extends Model
         return $this->belongsTo(AssetCategory::class);
     }
 
+    public function unitno_histories()
+    {
+        return $this->hasMany(UnitnoHistory::class)->orderby('date', 'desc');
+    }
+
 }

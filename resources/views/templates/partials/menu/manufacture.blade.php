@@ -1,6 +1,6 @@
 <li class="nav-item">
   <a href="{{ route('manufactures.index') }}" class="nav-link {{ request()->is('manufactures') || request()->is('manufactures/*') ? 'active' : '' }}">
-    <i class="fas fa-industry"></i>
+    <i class="far fa-circle nav-icon"></i>
     <p>
       Manufacture
     </p>
