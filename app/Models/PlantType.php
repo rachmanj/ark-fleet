@@ -15,4 +15,9 @@ class PlantType extends Model
     {
         return $this->hasMany(Equipment::class);
     }
+
+    public function asset_groups()
+    {
+        return $this->hasMany(AssetGroup::class);
+    }
 }

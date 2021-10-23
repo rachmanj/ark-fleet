@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssetCategoryController;
+use App\Http\Controllers\AssetGroupController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocumentTypeController;
@@ -87,6 +88,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('asset_categories/data', [AssetCategoryController::class, 'index_data'])->name('asset_categories.index.data');
     Route::resource('asset_categories', AssetCategoryController::class);
+
+    Route::get('asset_groups/data', [AssetGroupController::class, 'index_data'])->name('asset_groups.index.data');
+    Route::resource('asset_groups', AssetGroupController::class);
 
     Route::get('unitnohistories/data', [UnitnoHistoryController::class, 'index_data'])->name('unitno_histories.index.data');
     Route::resource('unitnohistories', UnitnoHistoryController::class);
