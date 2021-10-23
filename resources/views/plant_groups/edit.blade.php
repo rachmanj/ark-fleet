@@ -14,11 +14,11 @@
         <div class="card">
 
           <div class="card-header">
-            <h3 class="card-title">Create New Asset Group</h3>
+            <h3 class="card-title">Edit Plant Group Data</h3>
           </div> {{-- card-header --}}
 
-          <form action="{{ route('asset_groups.store') }}" method="POST">
-            @csrf
+          <form action="{{ route('plant_groups.update', $plant_group->id) }}" method="POST">
+            @csrf @method('PUT')
             <div class="card-body">
               <div class="col-6">
                 <div class="form-group">
@@ -26,7 +26,7 @@
                   <select name="plant_type_id" id="plant_type_id" class="form-control select2bs4 @error('plant_type_id') is-invalid @enderror" autofocus>
                     <option value="">-- select plant type --</option>
                     @foreach ($plant_types as $plant_type)
-                        <option value="{{ $plant_type->id }}" {{ old('plant_type_id') ==  $plant_type->id ? 'selected' : '' }}>{{ $plant_type->name }}</option>
+                        <option value="{{ $plant_type->id }}" {{ old('plant_type_id') ==  $plant_type->id || $plant_group->plant_type_id == $plant_type->id ? 'selected' : '' }}>{{ $plant_type->name }}</option>
                     @endforeach
                   </select>
                   @error('plant_type_id')
@@ -39,7 +39,7 @@
               <div class="col-6">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name">
+                  <input name="name" type="text" value="{{ old('name', $plant_group->name) }}" class="form-control @error('name') is-invalid @enderror" id="name">
                   @error('name')
                     <div class="invalid-feedback">
                       {{ $message }}

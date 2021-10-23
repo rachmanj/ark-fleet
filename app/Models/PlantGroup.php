@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AssetGroup extends Model
+class PlantGroup extends Model
 {
     use HasFactory;
 

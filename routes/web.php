@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AssetCategoryController;
-use App\Http\Controllers\AssetGroupController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocumentTypeController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\MovingController;
 use App\Http\Controllers\MovingDetailController;
+use App\Http\Controllers\PlantGroupController;
 use App\Http\Controllers\PlantTypeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
@@ -89,8 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('asset_categories/data', [AssetCategoryController::class, 'index_data'])->name('asset_categories.index.data');
     Route::resource('asset_categories', AssetCategoryController::class);
 
-    Route::get('asset_groups/data', [AssetGroupController::class, 'index_data'])->name('asset_groups.index.data');
-    Route::resource('asset_groups', AssetGroupController::class);
+    Route::get('plant_groups/data', [PlantGroupController::class, 'index_data'])->name('plant_groups.index.data');
+    Route::resource('plant_groups', PlantGroupController::class);
 
     Route::get('unitnohistories/data', [UnitnoHistoryController::class, 'index_data'])->name('unitno_histories.index.data');
     Route::resource('unitnohistories', UnitnoHistoryController::class);

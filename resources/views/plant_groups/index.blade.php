@@ -20,7 +20,7 @@
                 {{ Session::get('success') }}
               </div>
             @endif
-            <a href="{{ route('asset_groups.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>  Asset Group</a>
+            <a href="{{ route('plant_groups.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>  Asset Group</a>
           </div> {{-- card-header --}}
 
           <div class="card-body">
@@ -61,7 +61,7 @@
       $("#asset_categories").DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('asset_groups.index.data') }}',
+        ajax: '{{ route('plant_groups.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
           {data: 'plant_type'},

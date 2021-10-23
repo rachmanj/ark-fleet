@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssetGroupsTable extends Migration
+class CreatePlantGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAssetGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('asset_groups', function (Blueprint $table) {
+        Schema::create('plant_groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('plant_type_id')->constrained('plant_types')->onDelete('cascade');
             $table->string('name');
@@ -28,6 +28,6 @@ class CreateAssetGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asset_groups');
+        Schema::dropIfExists('plant_groups');
     }
 }

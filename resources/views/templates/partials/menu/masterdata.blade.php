@@ -1,5 +1,5 @@
 <li class="nav-item {{ request()->is('asset_categories') || request()->is('asset_categories/*') ||
-    request()->is('asset_groups') || request()->is('asset_groups/*') ||
+    request()->is('plant_groups') || request()->is('plant_groups/*') ||
     request()->is('manufactures') || request()->is('manufactures/*') ||
     request()->is('projects') || request()->is('projects/*') ||
     request()->is('planttypes') || request()->is('planttypes/*') ||
@@ -17,11 +17,11 @@
   <ul class="nav nav-treeview">
     <li class="nav-item">
         @include('templates.partials.menu.asset_categories')
-        @include('templates.partials.menu.asset_groups')
         @include('templates.partials.menu.doctypes')
         @include('templates.partials.menu.manufacture')
         @include('templates.partials.menu.project')
         @include('templates.partials.menu.planttypes')
+        @include('templates.partials.menu.plant_groups')
         @include('templates.partials.menu.suppliers')
         @include('templates.partials.menu.unitmodel')
         @include('templates.partials.menu.unitstatus')

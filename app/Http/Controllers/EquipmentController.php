@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEquipmentRequest;
 use App\Models\AssetCategory;
-use App\Models\Category;
 use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\Equipment;
@@ -75,13 +74,6 @@ class EquipmentController extends Controller
 
         $equipment->update(array_merge($request->validated(), [
             'unit_no'       => $request->unit_no,
-            'serial_no'     => $request->serial_no,
-            'chasis_no'     => $request->chasis_no,
-            'machine_no'    => $request->machine_no,
-            'nomor_polisi'  => $request->nomor_polisi,
-            'warna'         => $request->warna,
-            'engine_model'  => $request->engine_model,
-            'bahan_bakar'   => $request->bahan_bakar,
         ]));
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully updated');
