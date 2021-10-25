@@ -80,7 +80,43 @@
               </div> {{-- row --}}
 
               <div class="row">
-                <div class="col-3">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Plant Type</label>
+                    <select name="plant_type_id" id="plant_type_id" class="form-control select2bs4 @error('plant_type_id') is-invalid @enderror">
+                      <option value="">-- select plant type --</option>
+                      @foreach ($plant_types as $plant_type)
+                          <option value="{{ $plant_type->id }}" {{ old('plant_type_id') == $plant_type->id ||  $equipment->plant_type_id == $plant_type->id ? 'selected' : '' }}>{{ $plant_type->name }}</option>
+                      @endforeach
+                    </select>
+                    @error('plant_type_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Plant Group</label>
+                    <select name="plant_group_id" id="plant_group_id" class="form-control select2bs4 @error('plant_group_id') is-invalid @enderror">
+                      @if ($equipment->plant_group_id)
+                        <option value="{{ $equipment->plant_group_id }}">{{ $equipment->plant_group->name }}</option>
+                      @else
+                        <option value="">-- select plant group --</option>
+                      @endif
+                    </select>
+                    @error('plant_group_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4">
                   <div class="form-group">
                     <label>Current Project</label>
                     <select name="current_project_id" class="form-control select2bs4 @error('current_project_id') is-invalid @enderror">
@@ -96,23 +132,8 @@
                     @enderror
                   </div>
                 </div>
-                <div class="col-3">
-                  <div class="form-group">
-                    <label>Plant Type</label>
-                    <select name="plant_type_id" class="form-control select2bs4 @error('plant_type_id') is-invalid @enderror">
-                      <option value="">-- select plant type --</option>
-                      @foreach ($plant_types as $plant_type)
-                          <option value="{{ $plant_type->id }}" {{ old('plant_type_id') == $plant_type->id ||  $equipment->plant_type_id == $plant_type->id ? 'selected' : '' }}>{{ $plant_type->name }}</option>
-                      @endforeach
-                    </select>
-                    @error('plant_type_id')
-                      <div class="invalid-feedback">
-                        {{ $message }}
-                      </div>
-                    @enderror
-                  </div>
-                </div>
-                <div class="col-3">
+  
+                <div class="col-4">
                   <div class="form-group">
                     <label>Asset Category</label>
                     <select name="asset_category_id" class="form-control select2bs4 @error('asset_category_id') is-invalid @enderror">
@@ -128,7 +149,7 @@
                     @enderror
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                   <div class="form-group">
                     <label>Status</label>
                     <select name="unitstatus_id" class="form-control select2bs4 @error('unitstatus_id') is-invalid @enderror">
@@ -177,6 +198,15 @@
         success: function(data) {
           $('#manufacture').val(data.manufacture);
           $('#model_desc').val(data.model_desc);
+        }
+      });
+    });
+    $("#plant_type_id").change(function() {
+      $.ajax({
+        url: "{{ route('get_plant_groups') }}?plant_type_id=" + $(this).val(),
+        method: 'GET',
+        success: function(data) {
+          $('#plant_group_id').html(data.group_html);
         }
       });
     });

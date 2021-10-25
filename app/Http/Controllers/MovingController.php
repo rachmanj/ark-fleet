@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMovingRequest;
 use App\Models\Equipment;
 use App\Models\Moving;
 use App\Models\Project;
+use App\Models\Unitstatus;
 use Illuminate\Http\Request;
 
 class MovingController extends Controller
@@ -17,10 +18,9 @@ class MovingController extends Controller
 
     public function create()
     {
-        $equipments = Equipment::with('unitmodel', 'current_project')->where('isActive', 1)->get();
         $projects = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
 
-        return view('movings.create', compact('equipments', 'projects'));
+        return view('movings.create', compact('projects'));
     }
 
     public function store(StoreMovingRequest $request)

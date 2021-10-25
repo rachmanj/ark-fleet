@@ -41,6 +41,7 @@ class EquipmentController extends Controller
 
         Equipment::create(array_merge($request->validated(), [
             'unit_no' => $request->unit_no,
+            'plant_group_id' => $request->plant_group_id
         ]));
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully added');
@@ -74,6 +75,7 @@ class EquipmentController extends Controller
 
         $equipment->update(array_merge($request->validated(), [
             'unit_no'       => $request->unit_no,
+            'plant_group_id' => $request->plant_group_id
         ]));
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully updated');

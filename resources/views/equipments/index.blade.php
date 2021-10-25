@@ -20,7 +20,9 @@
                 {{ Session::get('success') }}
               </div>
             @endif
-            <a href="{{ route('equipments.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Equipment</a>
+            @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
+              <a href="{{ route('equipments.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Equipment</a>
+            @endif
           </div> {{-- card-header --}}
 
           <div class="card-body">

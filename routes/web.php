@@ -116,3 +116,4 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/model_detail', [UnitmodelController::class, 'get_model_detail'])->name('get_model_detail');
+Route::get('/get_plant_groups', [PlantGroupController::class, 'get_plant_group_by_plant_type_id'])->name('get_plant_groups');

@@ -56,6 +56,21 @@ class PlantGroupController extends Controller
         return redirect()->route('plant_groups.index')->with('success', 'Plant Group successfully deleted');
     }
 
+    public function get_plant_group_by_plant_type_id(Request $request)
+    {
+        if(!$request->plant_type_id) {
+            $html = '<option value="">-- select plant group --</option>';
+        } else {
+            $html = '';
+            $plant_groups = PlantGroup::where('plant_type_id', $request->plant_type_id)->get();
+            foreach ($plant_groups as $plant_group) {
+                $html .= '<option value="'.$plant_group->id.'">'.$plant_group->name.'</option>';
+            }
+        }
+
+        return response()->json(['group_html' => $html]);
+    }
+
     public function index_data()
     {
         $plant_groups = PlantGroup::orderBy('plant_type_id', 'asc')
@@ -71,4 +86,6 @@ class PlantGroupController extends Controller
                 ->rawColumns(['action'])
                 ->toJson();
     }
+
+    
 }

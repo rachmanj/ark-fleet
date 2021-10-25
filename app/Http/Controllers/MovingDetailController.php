@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipment;
 use App\Models\Moving;
 use App\Models\MovingDetail;
+use App\Models\Unitstatus;
 use Illuminate\Http\Request;
 
 class MovingDetailController extends Controller
@@ -93,9 +94,11 @@ class MovingDetailController extends Controller
 
     public function available_unit_data($project_id)
     {
-        // $project_id = $moving->project_id;
+        $unit_active = Unitstatus::where('name', 'ACTIVE')->first()->id;
+        // $equipments = Equipment::with('unitmodel', 'current_project')->where('unitstatus_id', $unit_active)->get();
+
         $equipments = Equipment::where('current_project_id', $project_id)
-                      ->where('isActive', 1)
+                      ->where('unitstatus_id', $unit_active)
                       ->whereNull('cart_flag')
                       ->orderBy('unit_no', 'asc')
                       ->get();

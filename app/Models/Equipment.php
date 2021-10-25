@@ -62,6 +62,11 @@ class Equipment extends Model
         return $this->hasMany(UnitnoHistory::class)->orderby('date', 'desc');
     }
 
+    public function plant_group()
+    {
+        return $this->belongsTo(PlantGroup::class, 'plant_group_id', 'id');
+    }
+
     protected static function boot()
     {
         parent::boot();
