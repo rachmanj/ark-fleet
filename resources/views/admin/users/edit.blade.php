@@ -80,9 +80,9 @@
               <div class="form-group">
                 <label>Role</label>
                 <select name="role" class="form-control" style="width: 100%;"> 
-                  <option value="USER" {{ $user->role == 'USER' ? 'selected' : '' }}>User</option>
-                  <option value="ADMIN" {{ $user->role == 'ADMIN' ? 'selected' : '' }}>Admin</option>
-                  <option value="SUPERADMIN" {{ $user->role == 'SUPERADMIN' ? 'selected' : '' }}>Superadmin</option>
+                  <option value="user" {{ $user->role == 'USER' ? 'selected' : '' }}>User</option>
+                  <option value="admin" {{ $user->role == 'ADMIN' ? 'selected' : '' }}>Admin</option>
+                  <option value="superadmin" {{ $user->role == 'SUPERADMIN' ? 'selected' : '' }}>Superadmin</option>
                 </select>
               </div>
             </div>
