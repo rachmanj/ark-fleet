@@ -20,7 +20,7 @@
                 {{ Session::get('success') }}
               </div>
             @endif
-            <a href="{{ route('plant_groups.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>  Asset Group</a>
+            <a href="{{ route('plant_groups.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>  Plant Group</a>
           </div> {{-- card-header --}}
 
           <div class="card-body">
