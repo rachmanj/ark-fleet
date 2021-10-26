@@ -1,11 +1,11 @@
 @extends('templates.main')
 
 @section('title_page')
-    Asset Groups
+    Plant Groups
 @endsection
 
 @section('breadcrumb_title')
-    assetgroups
+    plantgroups
 @endsection
 
 @section('content')
