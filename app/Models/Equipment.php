@@ -24,7 +24,9 @@ class Equipment extends Model
 
     public function unitstatus()
     {
-        return $this->belongsTo(Unitstatus::class);
+        return $this->belongsTo(Unitstatus::class)->withDefault([
+            'name' => 'n/a'
+        ]);
     }
     
     public function current_project()
@@ -49,12 +51,16 @@ class Equipment extends Model
 
     public function plant_type()
     {
-        return $this->belongsTo(PlantType::class);
+        return $this->belongsTo(PlantType::class)->withDefault([
+            'name' => 'n/a'
+        ]);
     }
 
     public function asset_category()
     {
-        return $this->belongsTo(AssetCategory::class);
+        return $this->belongsTo(AssetCategory::class)->withDefault([
+            'name' => 'n/a'
+        ]);
     }
 
     public function unitno_histories()

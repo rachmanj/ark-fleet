@@ -72,6 +72,12 @@
                     <input name="bahan_bakar" type="text" value="{{ old('bahan_bakar', $equipment->bahan_bakar) }}" class="form-control" id="bahan_bakar">
                   </div>
                 </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="capacity">Capacity</label>
+                    <input name="capacity" type="number" step="any" value="{{ old('capacity', $equipment->capacity) }}" class="form-control" id="bahan_bakar">
+                  </div>
+                </div>
               </div> {{-- row --}}
               <div class="row">
                 <div class="col-12">

@@ -15,6 +15,8 @@
       <dd class="col-sm-8">: {{ $equipment->asset_category->name }}</dd>
       <dt class="col-sm-4">Current Location</dt>
       <dd class="col-sm-8">: {{ $equipment->current_project->project_code . ' - ' . $equipment->current_project->bowheer .', '. $equipment->current_project->location }}</dd>
+      <dt class="col-sm-4">Status</dt>
+      <dd class="col-sm-8">: {{ $equipment->unitstatus->name }}</dd>
     </dl>
   </div>
   <div class="col-6">
@@ -33,6 +35,8 @@
       <dd class="col-sm-8">: {{ $equipment->warna }}</dd>
       <dt class="col-sm-4">Fuel Type</dt>
       <dd class="col-sm-8">: {{ $equipment->bahan_bakar }}</dd>
+      <dt class="col-sm-4">Capacity</dt>
+      <dd class="col-sm-8">: {{ $equipment->capacity }}</dd>
     </dl>
   </div>
 </div>

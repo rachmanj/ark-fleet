@@ -139,7 +139,7 @@
                     <select name="asset_category_id" class="form-control select2bs4 @error('asset_category_id') is-invalid @enderror">
                       <option value="">-- select asset category --</option>
                       @foreach ($asset_categories as $asset_category)
-                          <option value="{{ $asset_category->id }}" {{ $equipment->asset_category_id == $asset_category->id ? 'selected' : '' }}>{{ $asset_category->name }}</option>
+                          <option value="{{ $asset_category->id }}" {{ old('asset_category_id') == $asset_category->id ||  $equipment->asset_category_id === $asset_category->id ? 'selected' : '' }}>{{ $asset_category->name }}</option>
                       @endforeach
                     </select>
                     @error('asset_category_id')
@@ -155,7 +155,7 @@
                     <select name="unitstatus_id" class="form-control select2bs4 @error('unitstatus_id') is-invalid @enderror">
                       <option value="">-- select status --</option>
                       @foreach ($unitstatuses as $unitstatus)
-                          <option value="{{ $unitstatus->id }}" {{ $equipment->unitstatus_id == $unitstatus->id ? 'selected' : '' }} >{{ $unitstatus->name }}</option>
+                          <option value="{{ $unitstatus->id }}" {{ old('unitstatus_id') == $unitstatus->id || $equipment->unitstatus_id == $unitstatus->id ? 'selected' : '' }} >{{ $unitstatus->name }}</option>
                       @endforeach
                     </select>
                     @error('unitstatus_id')

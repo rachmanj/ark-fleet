@@ -32,6 +32,7 @@ class CreateEquipmentsTable extends Migration
             $table->string('warna')->nullable(); //warna kendaraan
             $table->string('unit_pic')->nullable();
             $table->string('cart_flag')->nullable(); // cart pada saat transaksi perpindahan alat (IPA)
+            $table->decimal('capacity')->nullable();
             $table->foreignId('assign_to')->nullable(); //pemegang alat
             $table->text('remarks')->nullable(); // catatan lain yg belum tercantum dalam field2
             $table->foreignId('created_by')->nullable(); // created_by

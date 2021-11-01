@@ -56,7 +56,7 @@ class EquipmentController extends Controller
 
     public function edit(Equipment $equipment)
     {
-        $projects   = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
+        $projects   = Project::orderBy('project_code', 'asc')->get();
         $unitmodels = Unitmodel::with('manufacture')->orderBy('model_no', 'asc')->get();
         $plant_types = PlantType::orderby('name', 'asc')->get();
         $asset_categories = AssetCategory::orderBy('name')->get();
