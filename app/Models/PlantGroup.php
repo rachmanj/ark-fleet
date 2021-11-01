@@ -13,6 +13,8 @@ class PlantGroup extends Model
 
     public function plant_type()
     {
-        return $this->belongsTo(PlantType::class);
+        return $this->belongsTo(PlantType::class)->withDefault([
+            'name' => 'n/a'
+        ]);
     }
 }

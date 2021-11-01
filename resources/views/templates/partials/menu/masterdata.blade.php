@@ -4,10 +4,21 @@
     request()->is('projects') || request()->is('projects/*') ||
     request()->is('planttypes') || request()->is('planttypes/*') ||
     request()->is('suppliers') || request()->is('suppliers/*') ||
+    request()->is('doctypes') || request()->is('doctypes/*') ||
     request()->is('unitmodels') || request()->is('unitmodels/*') ||
     request()->is('unitstatuses') || request()->is('unitstatuses/*')
     ? 'menu-open' : '' }}">
-  <a href="#" class="nav-link {{ request()->is('equipments') || request()->is('equipments/*') ? 'active' : '' }}">
+  <a href="#" class="nav-link {{ 
+    request()->is('asset_categories') || request()->is('asset_categories/*') ||
+    request()->is('plant_groups') || request()->is('plant_groups/*') ||
+    request()->is('manufactures') || request()->is('manufactures/*') ||
+    request()->is('projects') || request()->is('projects/*') ||
+    request()->is('planttypes') || request()->is('planttypes/*') ||
+    request()->is('suppliers') || request()->is('suppliers/*') ||
+    request()->is('doctypes') || request()->is('doctypes/*') ||
+    request()->is('unitmodels') || request()->is('unitmodels/*') ||
+    request()->is('unitstatuses') || request()->is('unitstatuses/*')
+  ? 'active' : '' }}">
     <i class="fas fa-file-alt"></i>
     <p>
       Master Data
