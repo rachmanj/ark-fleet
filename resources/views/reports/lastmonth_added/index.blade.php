@@ -14,14 +14,8 @@
 
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Dokumen yg akan jatuh tempo 2 bulan ke depan</h3>
+            <h3 class="card-title">Dokument yg akan jatuh tempo 2 bulan ke depan</h3>
             <a href="{{ route('reports.index') }}" class="btn btn-sm btn-primary float-right"><i class="fas fa-undo"></i> Back</a>
-            @if (Session::has('success'))
-              <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{ Session::get('success') }}
-              </div>
-            @endif
           </div> {{-- card-header --}}
 
           <div class="card-body">

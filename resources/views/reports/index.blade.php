@@ -22,6 +22,7 @@
               <li><b>Equipment</b></li>
               <ol>
                 <li>Equipment by Projects</li>
+                <li>Penambahan equipments bulan lalu</li>
               </ol>
               <li><b>Documents</b></li>
               <ol>
