@@ -18,6 +18,7 @@ class MovingController extends Controller
 
     public function create()
     {
+        
         $projects = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
 
         return view('movings.create', compact('projects'));
@@ -33,12 +34,33 @@ class MovingController extends Controller
         $moving = Moving::create(array_merge($request->validated(), [
             'ipa_no' => $request->ipa_no,
             'flag' => $moving_flag,
-            'created_by' => auth()->id()
         ]));
 
         $moving_id = $moving->id;
 
         return redirect()->route('moving_details.create', $moving_id);
+    }
+
+    public function edit_before_select_equipment($moving_id)
+    {
+        $moving = Moving::find($moving_id);
+        $projects = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
+
+        return view('movings.edit_before_equipment', compact('moving', 'projects'));
+    }
+
+    public function update_before_select_equipment(StoreMovingRequest $request, $id)
+    {
+        $this->validate($request, [
+            'ipa_no' => ['required', 'unique:movings,ipa_no,' .$id]
+        ]);
+
+        $moving = Moving::find($id);
+        $moving->update(array_merge($request->validated(), [
+            'ipa_no' => $request->ipa_no
+        ]));
+
+        return redirect()->route('moving_details.create', $id);
     }
 
     public function print_pdf($id)
@@ -55,10 +77,9 @@ class MovingController extends Controller
 
     public function edit(Moving $moving)
     {
-        $equipments = Equipment::with('unitmodel', 'current_project')->where('isActive', 1)->get();
         $projects = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
         
-        return view('movings.edit', compact('moving', 'equipments', 'projects'));
+        return view('movings.edit', compact('moving', 'projects'));
     }
 
     public function update(StoreMovingRequest $request, $id)
@@ -77,7 +98,8 @@ class MovingController extends Controller
 
     public function destroy(Moving $moving)
     {
-        //
+        $moving->delete();
+        return redirect()->route('movings.index')->with('success', 'IPA successfully deleted');
     }
 
     public function index_data()

@@ -29,7 +29,7 @@
                 <tr>
                   <th>No</th>
                   <th>Code</th>
-                  <th>Bowheer</th>
+                  <th>Bouwheer</th>
                   <th>Location</th>
                   <th>isActive</th>
                   <th>action</th>

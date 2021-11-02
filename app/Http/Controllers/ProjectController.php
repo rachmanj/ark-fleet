@@ -27,6 +27,7 @@ class ProjectController extends Controller
         Project::create(array_merge($request->validated(), [
             'address' => $request->address,
             'city' => $request->city,
+            'isActive' => 1,
             'created_by' => auth()->id()
         ]));
 

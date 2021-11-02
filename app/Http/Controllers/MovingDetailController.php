@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class MovingDetailController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function create($moving_id)
     {
         $moving = Moving::find($moving_id);
@@ -72,37 +67,16 @@ class MovingDetailController extends Controller
         return redirect()->route('movings.index');
     }
 
-    public function show(MovingDetail $movingDetail)
-    {
-        //
-    }
-
-    public function edit(MovingDetail $movingDetail)
-    {
-        //
-    }
-
-    public function update(Request $request, MovingDetail $movingDetail)
-    {
-        //
-    }
-
-    public function destroy(MovingDetail $movingDetail)
-    {
-        //
-    }
-
     public function available_unit_data($project_id)
     {
         $unit_active = Unitstatus::where('name', 'ACTIVE')->first()->id;
-        // $equipments = Equipment::with('unitmodel', 'current_project')->where('unitstatus_id', $unit_active)->get();
 
         $equipments = Equipment::where('current_project_id', $project_id)
-                      ->where('unitstatus_id', $unit_active)
-                      ->whereNull('cart_flag')
-                      ->orderBy('unit_no', 'asc')
-                      ->get();
-
+                        ->where('unitstatus_id', $unit_active)
+                        ->whereNull('cart_flag')
+                        ->orderBy('unit_no', 'asc')
+                        ->get();
+        
         return datatables()->of($equipments)
                 ->addColumn('model_no', function ($equipments) {
                     return $equipments->unitmodel->model_no;

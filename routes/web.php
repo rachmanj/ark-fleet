@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('movings/data', [MovingController::class, 'index_data'])->name('movings.index.data');
     Route::get('movings/{moving}/print_pdf', [MovingController::class, 'print_pdf'])->name('movings.print_pdf');
+    Route::get('movings/{moving}/before_select', [MovingController::class, 'edit_before_select_equipment'])->name('movings.before_select_equipment');
+    Route::put('movings/{moving}/before_select', [MovingController::class, 'update_before_select_equipment'])->name('movings.update_before_select_equipment');
     Route::resource('movings', MovingController::class);
 
     Route::get('moving_details/incart/data', [MovingDetailController::class, 'unit_incart_data'])->name('moving_details.unit_incart.data');

@@ -15,6 +15,7 @@
 
           <div class="card-header">
             <h3 class="card-title">Create New Project</h3>
+            <a href="{{ route('projects.index') }}" class="btn btn-sm btn-primary float-right"><i class="fas fa-undo"></i> Back</a>
           </div> {{-- card-header --}}
 
           <form action="{{ route('projects.store') }}" method="POST">
@@ -30,7 +31,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="bowheer">Bowheer</label>
+                <label for="bowheer">Bouwheer</label>
                 <input name="bowheer" type="text" class="form-control  @error('bowheer') is-invalid @enderror" id="bowheer">
                 @error('bowheer')
                   <div class="invalid-feedback">

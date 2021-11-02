@@ -15,6 +15,7 @@
 
           <div class="card-header">
             <h3 class="card-title">Select equipments to move</h3>
+            <a href="{{ route('movings.before_select_equipment', $moving->id) }}" class="btn btn-sm btn-primary float-right"><i class="fas fa-undo"></i> Back</a>
           </div> {{-- card-header --}}
 
             <div class="card-body">

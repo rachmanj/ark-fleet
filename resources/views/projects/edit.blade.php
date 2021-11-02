@@ -15,6 +15,7 @@
 
           <div class="card-header">
             <h3 class="card-title">Edit Project Data</h3>
+            <a href="{{ route('projects.index') }}" class="btn btn-sm btn-primary float-right"><i class="fas fa-undo"></i> Back</a>
           </div> {{-- card-header --}}
 
           <form action="{{ route('projects.update', $project->id) }}" method="POST">
@@ -25,7 +26,7 @@
                 <input name="project_code" value="{{ old('project_code', $project->project_code) }}" type="text" class="form-control" id="project_code" autofocus>
               </div>
               <div class="form-group">
-                <label for="bowheer">Bowheer</label>
+                <label for="bowheer">Bouwheer</label>
                 <input name="bowheer" value="{{ old('bowheer', $project->bowheer) }}" type="text" class="form-control" id="bowheer">
               </div>
               <div class="form-group">

@@ -27,6 +27,7 @@ class CreateMovingsTable extends Migration
             $table->text('remarks')->nullable();
             $table->string('flag')->nullable();
             $table->foreignId('created_by');
+            $table->foreignId('updated_by');
             $table->timestamps();
         });
     }
