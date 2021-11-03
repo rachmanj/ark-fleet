@@ -23,20 +23,20 @@
             <div class="card-body">
 
               <div class="row">
-                <div class="col-4">
+                <div class="col-6">
                   <div class="form-group">
-                    <label for="serial_no">Serial No</label>
+                    <label for="serial_no">Serial/Chasis No</label>
                     <input type="hidden" name="unit_no" value="{{ $equipment->unit_no }}">
                     <input name="serial_no" type="text" value="{{ old('serial_no', $equipment->serial_no) }}" class="form-control" id="serial_no" autofocus>
                   </div>
                 </div>
-                <div class="col-4">
+                {{-- <div class="col-4">
                   <div class="form-group">
                     <label for="chasis_no">Chasis No</label>
                     <input name="chasis_no" type="text" value="{{ old('chasis_no', $equipment->chasis_no) }}" class="form-control" id="chasis_no">
                   </div>
-                </div>
-                <div class="col-4">
+                </div> --}}
+                <div class="col-6">
                   <div class="form-group">
                     <label for="machine_no">Machine No</label>
                     <input name="machine_no" type="text" value="{{ old('machine_no', $equipment->machine_no) }}" class="form-control" id="machine_no">

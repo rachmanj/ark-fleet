@@ -23,8 +23,8 @@
     <dl class="row">
       <dt class="col-sm-4">Serial No</dt>
       <dd class="col-sm-8">: {{ $equipment->serial_no }}</dd>
-      <dt class="col-sm-4">Chasis No</dt>
-      <dd class="col-sm-8">: {{ $equipment->chasis_no }}</dd>
+      {{-- <dt class="col-sm-4">Chasis No</dt>
+      <dd class="col-sm-8">: {{ $equipment->chasis_no }}</dd> --}}
       <dt class="col-sm-4">Engine Model</dt>
       <dd class="col-sm-8">: {{ $equipment->engine_model}}</dd>
       <dt class="col-sm-4">Machine No</dt>
