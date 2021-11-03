@@ -28,19 +28,25 @@
 
         {{-- @include('templates.partials.menu.movings') --}}
         
-        @include('templates.partials.menu.documents')
+        @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin' || auth()->user()->role === 'admin_ga')
+          @include('templates.partials.menu.documents')
+        @endif
 
         @include('templates.partials.menu.reports')
 
-        @include('templates.partials.menu.masterdata')
+        @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
+          @include('templates.partials.menu.masterdata')
+        @endif
 
         {{-- <li class="nav-header">MASTER DATA</li> --}}
         
         {{-- @include('templates.partials.menu.categories') --}}
         
 
-        <li class="nav-header">ADMIN</li>
-        @include('templates.partials.menu.users')
+        @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
+          <li class="nav-header">ADMIN</li>
+          @include('templates.partials.menu.users')
+        @endif
         
       </ul>
     </nav>
