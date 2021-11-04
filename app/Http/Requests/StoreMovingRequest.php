@@ -27,12 +27,8 @@ class StoreMovingRequest extends FormRequest
             'ipa_date' => ['required'],
             'from_project_id' => ['required'],
             'to_project_id' => ['required'],
-            'tujuan_row_1' => ['string'],
-            'tujuan_row_2' => ['string'],
-            'cc_row_1' => ['string'],
-            'cc_row_2' => ['string'],
-            'cc_row_3' => ['string'],
-            'remarks' => ['string'],
+            'tujuan_row_1' => ['required'],
+            'cc_row_1' => ['required'],
         ];
     }
 }

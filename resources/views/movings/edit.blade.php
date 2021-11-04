@@ -51,7 +51,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="from_project_id">From Project</label>
-                    <select name="from_project_id" class="form-control select2bs4 @error('from_project_id') is-invalid @enderror">
+                    <select name="from_project_id" class="form-control select2bs4 @error('from_project_id') is-invalid @enderror" disabled>
                       <option value="">-- select project --</option>
                       @foreach ($projects as $project)
                           <option {{ old('from_project_id') == $project->id || $moving->from_project_id == $project->id ? "selected" : "" }} value="{{ $project->id }}">{{ $project->project_code .' - '. $project->bowheer .' - '. $project->location  }}</option>
@@ -67,7 +67,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="to_project_id">To Project</label>
-                    <select name="to_project_id" class="form-control select2bs4 @error('to_project_id') is-invalid @enderror">
+                    <select name="to_project_id" class="form-control select2bs4 @error('to_project_id') is-invalid @enderror" disabled>
                       <option value="">-- select project --</option>
                       @foreach ($projects as $project)
                           <option {{ old('to_project_id') == $project->id || $moving->to_project_id == $project->id ? "selected" : "" }} value="{{ $project->id }}">{{ $project->project_code .' - '. $project->bowheer .' - '. $project->location  }}</option>

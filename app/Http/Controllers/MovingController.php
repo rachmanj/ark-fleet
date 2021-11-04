@@ -33,6 +33,10 @@ class MovingController extends Controller
         $moving_flag = 'DRAFT' . auth()->id();
         $moving = Moving::create(array_merge($request->validated(), [
             'ipa_no' => $request->ipa_no,
+            'tujuan_row_2' => $request->tujuan_row_2,
+            'cc_row_2' => $request->cc_row_2,
+            'cc_row_3' => $request->cc_row_3,
+            'remarks' => $request->remarks,
             'flag' => $moving_flag,
         ]));
 
@@ -57,7 +61,11 @@ class MovingController extends Controller
 
         $moving = Moving::find($id);
         $moving->update(array_merge($request->validated(), [
-            'ipa_no' => $request->ipa_no
+            'ipa_no' => $request->ipa_no,
+            'tujuan_row_2' => $request->tujuan_row_2,
+            'cc_row_2' => $request->cc_row_2,
+            'cc_row_3' => $request->cc_row_3,
+            'remarks' => $request->remarks,
         ]));
 
         return redirect()->route('moving_details.create', $id);
@@ -70,11 +78,6 @@ class MovingController extends Controller
         return view('movings.print_pdf', compact('moving'));
     }
 
-    public function show(Moving $moving)
-    {
-        //
-    }
-
     public function edit(Moving $moving)
     {
         $projects = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
@@ -84,13 +87,17 @@ class MovingController extends Controller
 
     public function update(StoreMovingRequest $request, $id)
     {
-        $data_tosave = $this->validate($request, [
+        $this->validate($request, [
             'ipa_no' => ['required', 'unique:movings,ipa_no,' .$id]
         ]);
 
         $moving = Moving::find($id);
         $moving->update(array_merge($request->validated(), [
-            $data_tosave
+            'ipa_no' => $request->ipa_no,
+            'tujuan_row_2' => $request->tujuan_row_2,
+            'cc_row_2' => $request->cc_row_2,
+            'cc_row_3' => $request->cc_row_3,
+            'remarks' => $request->remarks,
         ]));
 
         return redirect()->route('movings.index')->with('success', 'Data successfully updated');
@@ -117,6 +124,9 @@ class MovingController extends Controller
                 })
                 ->editColumn('to_project', function ($movings) {
                     return $movings->to_project->project_code;
+                })
+                ->editColumn('created_by', function ($movings) {
+                    return $movings->creator->name;
                 })
                 ->addIndexColumn()
                 ->addColumn('action', 'movings.action')

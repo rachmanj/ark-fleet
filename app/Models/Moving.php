@@ -34,6 +34,11 @@ class Moving extends Model
         return $this->belongsTo(Project::class, 'to_project_id', 'id');
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
     public function equip_details()
     {
         return $this->hasMany(MovingDetail::class, 'moving_id', 'id');

@@ -32,6 +32,7 @@
                   <th>Date</th>
                   <th>Origin</th>
                   <th>Destination</th>
+                  <th>created by</th>
                   <th>action</th>
                 </tr>
               </thead>
@@ -70,6 +71,7 @@
           {data: 'ipa_date'},
           {data: 'from_project'},
           {data: 'to_project'},
+          {data: 'created_by'},
           {data: 'action'},
         ],
         fixedHeader: true,

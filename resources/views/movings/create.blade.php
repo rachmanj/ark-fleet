@@ -85,7 +85,12 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="tujuan_row_1">Tujuan <small>(baris 1)</small></label>
-                    <input name="tujuan_row_1" value="{{ old('tujuan_row_1') }}" type="text" class="form-control" id="tujuan_row_1">
+                    <input name="tujuan_row_1" value="{{ old('tujuan_row_1') }}" type="text" class="form-control @error('tujuan_row_1') is-invalid @enderror" id="tujuan_row_1">
+                    @error('tujuan_row_1')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
                   </div>
                 </div>
                 <div class="col-6">
@@ -100,7 +105,12 @@
                 <div class="col-4">
                   <div class="form-group">
                     <label for="cc_row_1">CC <small>(baris 1)</small></label>
-                    <input name="cc_row_1" value="{{ old('cc_row_1') }}" type="text" class="form-control" id="cc_row_1">
+                    <input name="cc_row_1" value="{{ old('cc_row_1') }}" type="text" class="form-control @error('cc_row_1') is-invalid @enderror" id="cc_row_1">
+                    @error('cc_row_1')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
                   </div>
                 </div>
                 <div class="col-4">
