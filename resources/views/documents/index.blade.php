@@ -31,6 +31,7 @@
                   <th>Doc. No</th>
                   <th>Date</th>
                   <th>Type</th>
+                  <th>Unit No</th>
                   <th>Due Date</th>
                   <th>action</th>
                 </tr>
@@ -69,6 +70,7 @@
           {data: 'document_no'},
           {data: 'document_date'},
           {data: 'doctype'},
+          {data: 'unit_no'},
           {data: 'due_date'},
           {data: 'action'},
         ],

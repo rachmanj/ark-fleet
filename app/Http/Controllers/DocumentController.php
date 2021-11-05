@@ -60,23 +60,6 @@ class DocumentController extends Controller
         return redirect()->route('documents.index')->with('success', 'Data succesfully added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Document  $document
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Document $document)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Document  $document
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Document $document)
     {
         $equipments = Equipment::with('unitmodel')->orderBy('unit_no', 'asc')->get();
@@ -86,13 +69,6 @@ class DocumentController extends Controller
         return view('documents.edit', compact('document', 'equipments', 'doctypes', 'suppliers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Document  $document
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreDocumentRequest $request, Document $document)
     {
         $document->update(array_merge($request->validated(), [
@@ -104,12 +80,6 @@ class DocumentController extends Controller
         return redirect()->route('documents.index')->with('success', 'Data succesfully updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Document  $document
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Document $document)
     {
         $document->delete();
@@ -158,6 +128,9 @@ class DocumentController extends Controller
                 })
                 ->addColumn('doctype', function($documents) {
                     return $documents->document_type->name;
+                })
+                ->addColumn('unit_no', function ($documents) {
+                    return $documents->equipment->unit_no;
                 })
                 ->addIndexColumn()
                 ->addColumn('action', 'documents.action')
