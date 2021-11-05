@@ -15,6 +15,7 @@
 
           <div class="card-header">
             <h3 class="card-title">Edit Equipment Data</h3>
+            <a href="{{ route('equipments.index') }}" class="btn btn-sm btn-primary float-right"><i class="fas fa-undo"></i> Back</a>
           </div> {{-- card-header --}}
 
           <form action="{{ route('equipments.update', $equipment->id) }}" method="POST">
@@ -22,7 +23,7 @@
             <div class="card-body">
 
               <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                   <div class="form-group">
                     <label for="unit_no">Unit No</label>
                     <input name="unit_no" type="text" value="{{ old('unit_no', $equipment->unit_no) }}" class="form-control @error('unit_no') is-invalid @enderror" id="unit_no" autofocus>
@@ -33,7 +34,18 @@
                     @enderror
                   </div>
                 </div>
-                <div class="col-8">
+                <div class="col-2">
+                  <div class="form-group">
+                    <label for="active_date">Active Date</label>
+                    <input name="active_date" type="text" value="{{ old('active_date', $equipment->active_date) }}" class="form-control @error('active_date') is-invalid @enderror" id="active_date" autofocus>
+                    @error('active_date')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-7">
                   <div class="form-group">
                     <label for="description">Description</label>
                     <input name="description" type="text" value="{{ old('description', $equipment->description) }}" class="form-control @error('description') is-invalid @enderror" id="description" autofocus>
@@ -171,7 +183,6 @@
             </div> {{-- card-body --}}
   
             <div class="card-footer">
-              <a href="{{ route('equipments.index') }}" class="btn btn-sm btn-success"><i class="fas fa-undo"></i> Back</a>
               <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Save</button>
             </div>
           </form>

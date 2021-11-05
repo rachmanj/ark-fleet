@@ -3,6 +3,8 @@
     <dl class="row">
       <dt class="col-sm-4">Unit No</dt>
       <dd class="col-sm-8">: {{ $equipment->unit_no }}</dd>
+      <dt class="col-sm-4">Active Date</dt>
+      <dd class="col-sm-8">: {{ $equipment->active_date }}</dd>
       <dt class="col-sm-4">Description</dt>
       <dd class="col-sm-8">: {{ $equipment->description }}</dd>
       <dt class="col-sm-4">Model</dt>
@@ -37,6 +39,8 @@
       <dd class="col-sm-8">: {{ $equipment->bahan_bakar }}</dd>
       <dt class="col-sm-4">Capacity</dt>
       <dd class="col-sm-8">: {{ $equipment->capacity }}</dd>
+      <dt class="col-sm-4">Created by</dt>
+      <dd class="col-sm-8">: {{ $equipment->creator->name }}</dd>
     </dl>
   </div>
 </div>

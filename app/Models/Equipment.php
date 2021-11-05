@@ -73,6 +73,13 @@ class Equipment extends Model
         return $this->belongsTo(PlantGroup::class, 'plant_group_id', 'id');
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id')->withDefault([
+            'name' => 'System Admin'
+        ]);
+    }
+
     protected static function boot()
     {
         parent::boot();

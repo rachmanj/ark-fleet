@@ -37,11 +37,13 @@ class EquipmentController extends Controller
     {
         $this->validate($request, [
             'unit_no'   => ['required', 'unique:equipments,unit_no'],
+            'active_date' => ['required']
         ]);
 
         Equipment::create(array_merge($request->validated(), [
             'unit_no' => $request->unit_no,
-            'plant_group_id' => $request->plant_group_id
+            'plant_group_id' => $request->plant_group_id,
+            'active_date' => $request->active_date
         ]));
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully added');
@@ -68,14 +70,16 @@ class EquipmentController extends Controller
     public function update(StoreEquipmentRequest $request, $id)
     {
         $this->validate($request, [
-            'unit_no'   => ['required', 'unique:equipments,unit_no,' .$id],
+            'unit_no' => ['required', 'unique:equipments,unit_no,' .$id],
+            'active_date' => ['required']
         ]);
 
         $equipment = Equipment::find($id);
 
         $equipment->update(array_merge($request->validated(), [
-            'unit_no'       => $request->unit_no,
-            'plant_group_id' => $request->plant_group_id
+            'unit_no' => $request->unit_no,
+            'plant_group_id' => $request->plant_group_id,
+            'active_date' => $request->active_date
         ]));
 
         return redirect()->route('equipments.index')->with('success', 'Data successfully updated');
