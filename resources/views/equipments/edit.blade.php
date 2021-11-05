@@ -37,7 +37,7 @@
                 <div class="col-2">
                   <div class="form-group">
                     <label for="active_date">Active Date</label>
-                    <input name="active_date" type="text" value="{{ old('active_date', $equipment->active_date) }}" class="form-control @error('active_date') is-invalid @enderror" id="active_date" autofocus>
+                    <input name="active_date" type="date" value="{{ old('active_date', $equipment->active_date) }}" class="form-control @error('active_date') is-invalid @enderror" id="active_date" autofocus>
                     @error('active_date')
                       <div class="invalid-feedback">
                         {{ $message }}
