@@ -22,7 +22,7 @@
               <li><b>Equipment</b></li>
               <ol>
                 <li>Equipment by Projects</li>
-                <li>Penambahan equipments bulan lalu</li>
+                <li><a href="{{ route('reports.report1_create') }}">Equipments Activation by Month</a></li>
               </ol>
               <li><b>Documents</b></li>
               <ol>

@@ -33,6 +33,7 @@
                   <th>Unit No</th>
                   <th>Model</th>
                   <th>Manufacture</th>
+                  <th>SN</th>
                   <th>Type</th>
                   <th>Location</th>
                   <th>action</th>
@@ -72,6 +73,7 @@
           {data: 'unit_no'},
           {data: 'model'},
           {data: 'manufacture'},
+          {data: 'serial_no'},
           {data: 'plant_type'},
           {data: 'current_project'},
           {data: 'action'},

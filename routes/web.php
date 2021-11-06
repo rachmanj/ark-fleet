@@ -98,9 +98,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('unitnohistories', UnitnoHistoryController::class);
 
     Route::get('reports/with_overdue/data', [ReportController::class, 'document_with_overdue_data'])->name('reports.document_with_overdue_data');
+    Route::get('reports/with_overdue/data', [ReportController::class, 'document_with_overdue_data'])->name('reports.document_with_overdue_data');
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/with_overdue', [ReportController::class, 'document_with_overdue'])->name('reports.document_with_overdue');
-    Route::get('reports/with_overdue/{document}', [ReportController::class, 'document_with_overdue'])->name('reports.overdue_edit');
+    Route::get('reports/report1', [ReportController::class, 'report1_create'])->name('reports.report1_create');
+    Route::post('reports/report1', [ReportController::class, 'report1_display'])->name('reports.report1_display');
+    Route::get('reports/report1/data', [ReportController::class, 'report1_data'])->name('reports.report1_data');
+    // Route::get('reports/with_overdue/{document}', [ReportController::class, 'document_with_overdue'])->name('reports.overdue_edit');
 
     //Users
     Route::get('/admin/activate', [UserController::class, 'activate_index'])->name('user.activate_index');
