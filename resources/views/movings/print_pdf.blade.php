@@ -97,20 +97,22 @@
         <thead>
           <tr>
             <th>Unit No</th>
-            <th>Model</th>
+            <th>Description</th>
             <th>S/N</th>
-            <th>Model</th>
-            <th>Manufacture</th>
+            <th>Engine Model</th>
+            <th>Engine No</th>
+            {{-- <th>Manufacture</th> --}}
           </tr>
         </thead>
         <tbody>
           @foreach ($moving->moving_details as $detail)
               <tr>
                 <td>{{ $detail->equipment->unit_no }}</td>
-                <td>{{ $detail->equipment->unitmodel->model_no }}</td>
+                <td><small>{{ $detail->equipment->description }}</small></td>
                 <td>{{ $detail->equipment->serial_no }}</td>
-                <td>{{ $detail->equipment->unitmodel->model_no }}</td>
-                <td>{{ $detail->equipment->unitmodel->manufacture->name }}</td>
+                <td>{{ $detail->equipment->engine_model }}</td>
+                <td>{{ $detail->equipment->machine_no }}</td>
+                {{-- <td>{{ $detail->equipment->unitmodel->manufacture->name }}</td> --}}
               </tr>
           @endforeach
               <tr>
