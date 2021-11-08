@@ -39,7 +39,7 @@ class Moving extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
-    public function equip_details()
+    public function moving_details()
     {
         return $this->hasMany(MovingDetail::class, 'moving_id', 'id');
     }

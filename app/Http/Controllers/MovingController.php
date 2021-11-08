@@ -73,7 +73,9 @@ class MovingController extends Controller
 
     public function print_pdf($id)
     {
-        $moving = Moving::with('equip_details.equipment')->where('id', $id)->first();
+        $moving = Moving::with('moving_details.equipment')->where('id', $id)->first();
+        // return $moving;
+        // die;
 
         return view('movings.print_pdf', compact('moving'));
     }

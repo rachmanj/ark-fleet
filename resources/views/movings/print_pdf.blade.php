@@ -98,19 +98,23 @@
           <tr>
             <th>Unit No</th>
             <th>Model</th>
+            <th>S/N</th>
+            <th>Model</th>
             <th>Manufacture</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($moving->equip_details as $equipment)
+          @foreach ($moving->moving_details as $detail)
               <tr>
-                <td>{{ $equipment->equipment->unit_no }}</td>
-                <td>{{ $equipment->equipment->unitmodel->model_no }}</td>
-                <td>{{ $equipment->equipment->unitmodel->manufacture->name }}</td>
+                <td>{{ $detail->equipment->unit_no }}</td>
+                <td>{{ $detail->equipment->unitmodel->model_no }}</td>
+                <td>{{ $detail->equipment->serial_no }}</td>
+                <td>{{ $detail->equipment->unitmodel->model_no }}</td>
+                <td>{{ $detail->equipment->unitmodel->manufacture->name }}</td>
               </tr>
           @endforeach
               <tr>
-                <td colspan="3"><b>Remarks:</b> {{ $moving->remarks }} </td>
+                <td colspan="5"><b>Remarks:</b> {{ $moving->remarks }} </td>
               </tr>
         </tbody>
       </table>
