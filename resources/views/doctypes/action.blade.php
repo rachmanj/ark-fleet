@@ -1,4 +1,4 @@
-@if ($model->name != 'STNK' && $model->name != 'BPKB' && $model->name != 'Polis Asuransi' && $model->name != 'Purchase Order')
+@if ($model->name != 'STNK' && $model->name != 'BPKB' && $model->name != 'Polis Asuransi' && $model->name != 'Purchase Order' && $model->name != 'Other Payment')
   @if (auth()->user()->role === 'superadmin'||auth()->user()->role === 'admin')
   <form action="{{ route('doctypes.destroy', $model->id) }}" method="POST">
     @csrf @method('DELETE')

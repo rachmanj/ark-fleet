@@ -198,10 +198,12 @@ class EquipmentController extends Controller
 
     public function equipment_acquisitions_data($id)
     {
-        $document_type = DocumentType::where('name', 'Purchase Order')->first();
+        $po_doctype = DocumentType::where('name', 'Purchase Order')->first();
+        $op_doctype = DocumentType::where('name', 'Other Payment')->first();
 
         $documents = Document::with('document_type')->where('equipment_id', $id)
-                    ->where('document_type_id', $document_type->id)
+                    ->where('document_type_id', $po_doctype->id)
+                    ->orWhere('document_type_id', $op_doctype->id)
                     ->orderBy('document_date', 'desc')
                     ->get();
 
