@@ -80,6 +80,13 @@ class MovingController extends Controller
         return view('movings.print_pdf', compact('moving'));
     }
 
+    public function print2_pdf($id)
+    {
+        $moving = Moving::with('moving_details.equipment')->where('id', $id)->first();
+
+        return view('movings.print2_pdf', compact('moving'));
+    }
+
     public function edit(Moving $moving)
     {
         $projects = Project::where('isActive', 1)->orderBy('project_code', 'asc')->get();
