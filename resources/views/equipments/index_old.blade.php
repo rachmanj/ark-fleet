@@ -26,30 +26,8 @@
           </div> {{-- card-header --}}
 
           <div class="card-body">
-            <table id="equipments" class="table table-bordered table-striped datatable datatable-Asset">
+            <table id="equipments" class="table table-bordered table-striped">
               <thead>
-                <tr>
-                  <td></td>
-                  <td>
-                    <input type="text" class="search form-control" placeholder="unit no">
-                  </td>
-                  <td>
-                    <input type="text" class="search form-control" placeholder="model">
-                  </td>
-                  <td>
-                    <input type="text" class="search form-control" placeholder="manufacture">
-                  </td>
-                  <td>
-                    <input type="text" class="search form-control" placeholder="S/N">
-                  </td>
-                  <td>
-                    <input type="text" class="search form-control" placeholder="plant type">
-                  </td>
-                  <td>
-                    <input type="text" class="search form-control" placeholder="location">
-                  </td>
-                  <td></td>
-                </tr>
                 <tr>
                   <th>No</th>
                   <th>Unit No</th>
@@ -86,12 +64,10 @@
 
   <script>
     $(function () {
-      let dtOverrideGlobals = {
+      $("#equipments").DataTable({
         processing: true,
         serverSide: true,
-        retrieve: true,
-        aaSorting: [],
-        ajax: "{{ route('equipments.index.data') }}",
+        ajax: '{{ route('equipments.index.data') }}',
         columns: [
           {data: 'DT_RowIndex', orderable: false, searchable: false},
           {data: 'unit_no'},
@@ -102,21 +78,8 @@
           {data: 'current_project'},
           {data: 'action'},
         ],
-        orderCellsTop: true,
-        order: [[ 1, 'asc' ]],
-        pageLength: 10,
-      };
-
-    let table = $('#equipments').DataTable(dtOverrideGlobals);
-
-    $('.datatable thead').on('input', '.search', function () {
-        let strict = $(this).attr('strict') || false
-        let value = strict && this.value ? "^" + this.value + "$" : this.value
-        table
-          .column($(this).parent().index())
-          .search(value, strict)
-          .draw()
-      });
+        fixedHeader: true,
+      })
     });
   </script>
 
