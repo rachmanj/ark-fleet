@@ -199,11 +199,11 @@ class EquipmentController extends Controller
     public function equipment_acquisitions_data($id)
     {
         $po_doctype = DocumentType::where('name', 'Purchase Order')->first();
-        $op_doctype = DocumentType::where('name', 'Other Payment')->first();
+        // $op_doctype = DocumentType::where('name', 'Other Payment')->first();
 
         $documents = Document::with('document_type')->where('equipment_id', $id)
                     ->where('document_type_id', $po_doctype->id)
-                    ->orWhere('document_type_id', $op_doctype->id)
+                    // ->orWhere('document_type_id', $op_doctype->id)
                     ->orderBy('document_date', 'desc')
                     ->get();
 
@@ -260,7 +260,7 @@ class EquipmentController extends Controller
             'BPKB',
             'STNK', 
             'Polis Asuransi', 
-            'Purchase Order'
+            'Purchase Order',
         ];
         foreach ($docs_exclude_name as $n) { // mencari ID dari dokumen2 exclude
             $docs_exclude_id_arr[] = DocumentType::where('name', $n)->first()->id;
@@ -280,7 +280,11 @@ class EquipmentController extends Controller
                         return date('d-M-Y', strtotime($documents->document_date));
                     })
                     ->editColumn('due_date', function ($documents) {
-                        return date('d-M-Y', strtotime($documents->due_date));
+                        if($documents->due_date) {
+                            return  date('d-M-Y', strtotime($documents->due_date));
+                        } else {
+                            return null;
+                        }
                     })
                     ->addColumn('doctype', function ($documents) {
                         return $documents->document_type->name;

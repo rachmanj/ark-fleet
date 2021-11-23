@@ -14,7 +14,9 @@ class Equipment extends Model
 
     public function unitmodel()
     {
-        return $this->belongsTo(Unitmodel::class);
+        return $this->belongsTo(Unitmodel::class)->withDefault([
+            'model_no' => 'n/a'
+        ]);
     }
 
     public function category()
@@ -34,10 +36,10 @@ class Equipment extends Model
         return $this->belongsTo(Project::class, 'current_project_id', 'id');
     }
 
-    public function ipas()
-    {
-        return $this->hasMany(MovingDetail::class);
-    }
+    // public function ipas()
+    // {
+    //     return $this->hasMany(MovingDetail::class);
+    // }
 
     public function documents()
     {
