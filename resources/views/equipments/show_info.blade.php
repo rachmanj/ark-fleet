@@ -4,7 +4,7 @@
       <dt class="col-sm-4">Unit No</dt>
       <dd class="col-sm-8">: {{ $equipment->unit_no }}</dd>
       <dt class="col-sm-4">Active Date</dt>
-      <dd class="col-sm-8">: {{ date('d-M-Y', strtotime($equipment->active_date)) }}</dd>
+      <dd class="col-sm-8">: {{ $equipment->active_date ? date('d-M-Y', strtotime($equipment->active_date)) : ' -' }}</dd>
       <dt class="col-sm-4">Description</dt>
       <dd class="col-sm-8">: {{ $equipment->description }}</dd>
       <dt class="col-sm-4">Model</dt>
