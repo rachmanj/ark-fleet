@@ -22,6 +22,7 @@
             @endif
             @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin')
               <a href="{{ route('equipments.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Equipment</a>
+              <a href="{{ route('equipments.export_excel') }}" class="btn btn-sm btn-success"><i class="fas fa-print"></i> Export to Excel</a>
             @endif
           </div> {{-- card-header --}}
 

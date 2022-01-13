@@ -21,7 +21,9 @@ class Equipment extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withDefault([
+            'name' => 'n/a'
+        ]);
     }
 
     public function unitstatus()
@@ -72,7 +74,9 @@ class Equipment extends Model
 
     public function plant_group()
     {
-        return $this->belongsTo(PlantGroup::class, 'plant_group_id', 'id');
+        return $this->belongsTo(PlantGroup::class, 'plant_group_id', 'id')->withDefault([
+            'name' => 'n/a'
+        ]);
     }
 
     public function creator()

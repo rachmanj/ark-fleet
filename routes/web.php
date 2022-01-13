@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('equipments/{equipment}/others/data', [EquipmentController::class, 'equipment_others_data'])->name('equipments.others.data');
     Route::get('equipments/{equipment}/edit_detail', [EquipmentController::class, 'edit_detail'])->name('equipments.edit_detail');
     Route::put('equipments/{equipment}/update_detail', [EquipmentController::class, 'update_detail'])->name('equipments.update_detail');
+    Route::get('/equipments/export_excel', [EquipmentController::class, 'equipment_export_excel'])->name('equipments.export_excel');
     Route::resource('equipments', EquipmentController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

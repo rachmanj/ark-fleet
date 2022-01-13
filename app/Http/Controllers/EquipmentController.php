@@ -14,6 +14,8 @@ use App\Models\UnitnoHistory;
 use App\Models\Unitstatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\EquipmentsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EquipmentController extends Controller
 {
@@ -311,6 +313,11 @@ class EquipmentController extends Controller
                 })
                 ->addIndexColumn()
                 ->toJson();
+    }
+
+    public function equipment_export_excel()
+    {
+        return Excel::download(new EquipmentsExport(), 'equipments_export.xlsx');
     }
 
 }
