@@ -5,7 +5,7 @@
       <th>UnitNo</th>
       <th>ActiveDate</th>
       <th>Desc</th>
-      <th>Category</th>
+      <th>AssetCategory</th>
       <th>PlantType</th>
       <th>PlantGroup</th>
       <th>Status</th>
