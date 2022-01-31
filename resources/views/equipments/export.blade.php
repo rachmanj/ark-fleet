@@ -30,7 +30,7 @@
           <td>{{ $equipment->unit_no }}</td>
           <td>{{ $equipment->active_date ? date('d-M-Y', strtotime($equipment->active_date)) : 'n/a' }}</td>
           <td>{{ $equipment->description }}</td>
-          <td>{{ $equipment->category->name }}</td>
+          <td>{{ $equipment->asset_category->name }}</td>
           <td>{{ $equipment->plant_type->name }}</td>
           <td>{{ $equipment->plant_group->name }}</td>
           <td>{{ $equipment->unitstatus->name }}</td>
