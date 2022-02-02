@@ -86,6 +86,13 @@ class Equipment extends Model
         ]);
     }
 
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id')->withDefault([
+            'name' => 'System Admin'
+        ]);
+    }
+
     protected static function boot()
     {
         parent::boot();

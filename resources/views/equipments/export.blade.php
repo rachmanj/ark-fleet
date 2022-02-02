@@ -21,6 +21,10 @@
       <th>CartFlag</th>
       <th>Capacity</th>
       <th>AssignTo</th>
+      <th>CreatedBy</th>
+      <th>CreatedAt</th>
+      <th>UpdatedBy</th>
+      <th>UpdatedAt</th>
     </tr>
   </thead>
   <tbody>
@@ -46,6 +50,10 @@
           <td>{{ $equipment->cart_flag }}</td>
           <td>{{ $equipment->capacity }}</td>
           <td>{{ $equipment->assign_to }}</td>
+          <td>{{ $equipment->creator->name }}</td>
+          <td>{{ $equipment->created_at ? date('d-M-Y H:i:s', strtotime($equipment->created_at)) : 'Uploaded'  }}</td>
+          <td>{{ $equipment->updater->name }}</td>
+          <td>{{ $equipment->updated_at ? date('d-M-Y H:i:s', strtotime($equipment->updated_at)) : 'n/a' }}</td>
         </tr>
     @endforeach
   </tbody>
