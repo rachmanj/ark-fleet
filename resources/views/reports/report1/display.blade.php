@@ -31,23 +31,18 @@
               </form>
             </div>
           </div>
-          <div class="card-body p-0">
-            <table class="table table-head-fixed text-nowrap">
+          <div class="card-body">
+            <table class="table table-head-fixed text-nowrap table-striped table-bordered" id="report1">
               <thead>
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>Unit No</th>
                   <th>Model</th>
-                  <th>Active Date</th>
+                  <th>Activation Date</th>
                   <th>Project</th>
                 </tr>
               </thead>
               <tbody>
-                @if (!$equipments->count())
-                  <tr>
-                    <td colspan="5" class="text-center"><h5>No data found</h5></td>
-                  </tr>
-                @else
                   @foreach ($equipments as $item)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
@@ -57,7 +52,6 @@
                       <td>{{ $item->current_project->project_code }}</td>
                     </tr>
                   @endforeach   
-                @endif
               </tbody>
             </table>
           </div> {{-- card-body --}}
@@ -66,4 +60,25 @@
     </div>
 @endsection
 
+@section('styles')
+    <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('adminlte/plugins/datatables/css/datatables.min.css') }}"/>
+@endsection
 
+@section('scripts')
+    <!-- DataTables  & Plugins -->
+<script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/datatables/datatables.min.js') }}"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#report1').DataTable();
+  });
+</script>
+@endsection
