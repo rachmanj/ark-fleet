@@ -28,9 +28,9 @@
 
         {{-- @include('templates.partials.menu.movings') --}}
         
-        @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin' || auth()->user()->role === 'admin_ga')
+        {{-- @if (auth()->user()->role === 'superadmin' || auth()->user()->role === 'admin' || auth()->user()->role === 'admin_ga') --}}
           @include('templates.partials.menu.documents')
-        @endif
+        {{-- @endif --}}
 
         @include('templates.partials.menu.reports')
 
