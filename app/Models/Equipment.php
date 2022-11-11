@@ -19,6 +19,11 @@ class Equipment extends Model
         ]);
     }
 
+    public function model()
+    {
+        return $this->belongsTo(Unitmodel::class, 'unitmodel_id', 'id')->withDefault(['model_no' => 'n/a']);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class)->withDefault([
